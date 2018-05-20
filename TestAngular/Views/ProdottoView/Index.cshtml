@@ -1,0 +1,160 @@
+﻿@model TestAngular.Controllers.ProdottoViewModel
+@using System.ComponentModel
+@using DataObjects
+@using DataObjects.Core
+@using GridMvc.Html
+
+@{
+
+    var vis = Model.Visibilita.ToList();
+    ViewBag.Title = "Elenco Prodotti";
+}
+@section Scripts
+{
+    <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
+    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid-theme.min.css" />
+
+    <script type="text/javascript" src="../../Scripts/jsGrid/jsgrid.min.js"></script>
+
+    <script type="text/javascript" src="../../Scripts/ProdottoView/ProdottoController.js"></script>
+
+    <script type="text/javascript">
+     function LoadGrid2(newdata) {
+        debugger;
+         Prodotti.ListaProdotti = newdata;
+         //Setta la proprietà JsGrid con l'oggettone
+          $("#jsGrid").jsGrid({
+
+              height: "98%",
+              width: "95%",
+            sorting: true,
+            autoload: false,
+            paging: false,
+             pageLoading: false,
+            filter:true,
+            controller:Prodotti
+              ,
+
+              rowClick: function (args) {
+                  // save selected item
+                  selectedItem = args.item;
+
+                  // save selected row
+                  $selectedRow = $(args.event.target).closest("tr");
+
+                  // add class to highlight row
+                  $selectedRow.backgroundColor = "blue";
+
+              },
+              fields: [
+
+                
+                @{
+                    foreach (var t in vis)
+                    {
+                        if (t.Visible)
+                        {
+                            <text>
+                                { name: "@t.Name", type: "text", width: 150 },
+                            </text>
+                        }
+                    }
+                }
+                  {
+                      headerTemplate: function () {
+                          return "Selezione";
+
+                      },
+                      itemTemplate: function (_, item) {
+                          return $("<input>").attr("type", "checkbox")
+                              .prop("checked", $.inArray(item, selectedItems) > -1)
+                              .on("change", function () {
+                                  $(this).is(":checked") ? selectItem(item) : unselectItem(item);
+                              });
+                      },
+                      align: "center",
+                      width: 50
+                  }
+            ]
+        });
+         debugger;
+
+        $("#jsGrid").jsGrid("loadData");
+        }
+
+
+    function getData() {
+        var description = document.getElementById("txtCodice").value;
+        debugger;
+        var searcher = {
+            PartialDescription: description
+
+        };
+        debugger;
+        $.ajax({
+            headers: { 'Token': getToken() },
+            type: "POST",
+            data: JSON.stringify(searcher),
+            url: "../api/GetProdottoByDTOSearch",
+            contentType: "application/json",
+            success: function (newData) { LoadGrid2(newData); },
+            error: function (xhr, error) {
+                debugger;
+                console.debug(xhr); console.debug(error);
+            }
+        });
+    }
+    var selectedItems = [];
+
+    var selectItem = function (item) {
+        selectedItems.push(item);
+    };
+
+    var unselectItem = function (item) {
+        selectedItems = $.grep(selectedItems, function (i) {
+            return i !== item;
+        });
+    };
+
+    var deleteSelectedItems = function () {
+        debugger;
+            if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
+                return;
+        Prodotti.DeleteItems(selectedItems);
+        debugger;
+
+            LoadGrid2(Prodotti.ListaProdotti);
+            selectedItems = [];
+
+    };
+
+
+
+
+    </script>
+}
+
+<h2>Elenco Prodotti</h2>
+<b></b>
+
+<div style="height: 90%; width: 100%; border-style: solid;border-color:red">
+    <div id="jsGrid" style=" height: 100%; width: 100%; border-style: solid;border-color:yellow">
+
+
+
+    </div>
+</div>
+
+@section SideBar
+{
+    <div style="border-color: black; border-style: solid;">
+        <b>Ricerca Prodotti</b>
+        <input type="text" id="txtCodice" style="width:100% " />
+        <input type="button" value="Cerca" onclick="getData()" />
+    </div>
+
+    <div style="border-color: black; border-style: solid;">
+        <button onclick="deleteSelectedItems()">Elimina Selezione</button>
+    </div>
+}

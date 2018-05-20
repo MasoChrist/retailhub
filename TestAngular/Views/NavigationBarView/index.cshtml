@@ -1,0 +1,62 @@
+﻿@using DataObjects
+@model List<  DataObjects.DTONavBar>
+{
+@Layout=null
+}
+
+<div  role="navigation" style="height:20px">
+    <div class="container">
+      
+        <div >
+            <ul  id="topBar">
+                @{
+                    foreach (var t in Model)
+                    {
+                        
+                            <li>
+                       
+                                @if (string.IsNullOrEmpty(t.CurrentItem.Controller))
+                                {
+                                    <text>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">@t.CurrentItem.Caption <b class="caret"></b></a>
+                                    </text>
+                                }
+                                else
+                                {
+                                    <text>
+                                        <a href="@t.CurrentItem.Controller" class="dropdown-toggle" data-toggle="dropdown">@t.CurrentItem.Caption <b class="caret"></b></a>
+                                    </text>
+                                }
+
+                                @if (t.ChildItems != null && t.ChildItems.Any())
+                                {
+
+                                    <ul >
+                                        @{
+                                            foreach (var subt in t.ChildItems)
+                                            {
+                                                <text>
+                                                    <li>
+                                                        @Html.ActionLink(subt.Caption, subt.Action, subt.Controller)
+
+                                                    </li>
+                                                </text>
+                                            }
+                                        }
+                                    </ul>
+
+                                }
+
+                       
+                            </li>
+                       
+                    }
+                }
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+

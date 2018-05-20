@@ -1,0 +1,42 @@
+﻿@model DataObjects.DTOAuthentication
+<div>
+    @if ( Model!=null && !string.IsNullOrEmpty(Model.Token))
+    {
+        <text>
+
+            "Utente loggato:"
+            @Model.UserName
+            <br />
+            <input type="button" value="Cerca" onclick="LogOut()" />
+            <br>
+        </text>
+    }
+    else
+    {
+        <text>
+            Utente:
+            <input type="text" id="txtUserName" style="width:70%" />
+            <br />
+            Password:
+            <input type="text" id="txtPassword" style="width:70%" />
+            <br />
+            <input type="button" value="Login" onclick="Login()" />
+        </text>
+
+    }
+</div>
+@section Scripts
+{
+    <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
+<script type="text/javascript" src="../../Scripts/Login/Login.js"></script>
+    <script type="text/javascript">
+        function LogOut() {
+            window.LoginController.LogOutRequest();
+        }
+        function Login() {
+            window.LoginController.LoginRequest(document.getElementById("txtUserName").value,
+                document.getElementById("txtPassword").value);
+        }
+
+    </script>
+}

@@ -1,0 +1,26 @@
+﻿@model DataObjects.DTOProdottoSearch
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+
+<div>
+    <h4>DTOProdottoSearch</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PartialDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PartialDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
