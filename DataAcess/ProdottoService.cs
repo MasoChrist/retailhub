@@ -18,7 +18,7 @@ namespace DataAccess
         {
 
             if (Chiave == null) return false;
-            using (var ctx = new SqlServeEntitites())
+            using (var ctx = new SqlServerEntitites())
             {
                 if (!ctx.Products.Any(x => x.ID.Equals(Chiave.ID))) return false;
                 var dto = ctx.Products.FirstOrDefault(x => x.ID.Equals(Chiave.ID));
@@ -30,7 +30,7 @@ namespace DataAccess
 
         protected override GuidKey InnerUpdateOrInsert(DTOProdotto Dato)
         {
-            using (var ctx = new SqlServeEntitites())
+            using (var ctx = new SqlServerEntitites())
             {
                 var tab = new Products();
                 if (!ctx.Products.Any(x => x.ID.Equals(Dato.ID)))
@@ -55,7 +55,7 @@ namespace DataAccess
 
         public override DTOProdotto GetByID(GuidKey chiave)
         {
-            using (var ctx = new SqlServeEntitites())
+            using (var ctx = new SqlServerEntitites())
             {
                 return mapTable(ctx.Products.FirstOrDefault(x => x.ID.Equals(chiave.ID)));
             }
@@ -83,7 +83,7 @@ namespace DataAccess
 
         protected List<DTOProdotto> GetByContition(Func<Products, bool> expression)
         {
-            using (var ctx = new SqlServeEntitites())
+            using (var ctx = new SqlServerEntitites())
             {
                 return ctx.Products.Where(expression).ToList().Select(mapTable).ToList();
             }

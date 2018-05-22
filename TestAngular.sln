@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataObjects", "MDataObjects
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientNotification", "ClientNotification\ClientNotification.csproj", "{65D12D5C-9481-4178-A281-4F1791431C86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDataAccessComponent", "IDataAccessComponent\IDataAccessComponent.csproj", "{FC0DBA85-7061-4C51-A91C-5730335F82B9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityModel", "EntityModel\EntityModel.csproj", "{A73F78E7-14B7-4339-934C-B493DFE9BA4F}"
 EndProject
 Global
@@ -43,10 +41,6 @@ Global
 		{65D12D5C-9481-4178-A281-4F1791431C86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65D12D5C-9481-4178-A281-4F1791431C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65D12D5C-9481-4178-A281-4F1791431C86}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC0DBA85-7061-4C51-A91C-5730335F82B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC0DBA85-7061-4C51-A91C-5730335F82B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC0DBA85-7061-4C51-A91C-5730335F82B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC0DBA85-7061-4C51-A91C-5730335F82B9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
