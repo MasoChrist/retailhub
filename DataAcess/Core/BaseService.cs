@@ -4,17 +4,26 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using ClientNotification;
+
 using DataObjects;
 using DataObjects.Core;
+using Newtonsoft.Json;
 
 namespace DataAccess
 {
     
 
-    public abstract class BaseService<TDTOChiave ,TDTOData > where TDTOData:IDTO<IKey>,TDTOChiave
+
+    public abstract class BaseService<TDTOChiave ,TDTOData > : ISyncronizable<TDTOChiave, TDTOData> where TDTOData:IDTO<IKey>,TDTOChiave
     {
+
+        //TODO: creatorIdentifier deve essere da qualche parte nei settings del programma e corrispondere a uno dei client nella rete
+
+        public Guid MyIdentifier => new Guid();
+        
         private List<GridMappingAttribute> _visiblita;
-        public abstract List<TDTOData> GetByContition(Func<TDTOData, bool> expression);
+        protected ClientNotificatorService Orchestrator { get; set; } = new ClientNotificatorService();
 
         public virtual Dictionary<string, object> getValuesByName(TDTOData dato)
         {
@@ -37,6 +46,8 @@ namespace DataAccess
             }
             
         }
+
+        public string DataTypeIdentifier => typeof(TDTOData).ToString();
 
         private void getProperties()
         {
@@ -65,20 +76,42 @@ namespace DataAccess
         }
 
 
-        public  List<TDTOData> GetAll()
+
+
+        public abstract TDTOData GetByID(TDTOChiave chiave);
+      
+
+        protected abstract bool InnerDelete(TDTOChiave chiave);
+        protected abstract TDTOChiave InnerUpdateOrInsert(TDTOData cato);
+
+        public bool Delete(TDTOChiave chiave,Guid creatorIdentifier)
         {
-            return GetByContition(x=> true);
+            var ret = InnerDelete(chiave);
+            if (creatorIdentifier != MyIdentifier) return ret;
+            if(Orchestrator!=null && ret) Orchestrator.AppendNotification( new DTONotification
+            {
+                CreationDateTime =  DateTime.UtcNow, CreatorIdentifier = MyIdentifier, Key = 
+                JsonConvert.SerializeObject(chiave), NotificationDTOType =  typeof (TDTOData).FullName, NotificationType = NotificationType.Delete, Status = PendingNotificationStatus.Queued
+            });
+            return ret;
         }
 
-        public TDTOData GetByID(TDTOChiave chiave)
+        public TDTOChiave UpdateOrInsert(TDTOData dato,Guid creatorIdentifier)
         {
-            return GetByContition(x => x.Identifier.Equals(chiave)).FirstOrDefault();
+            var ret = InnerUpdateOrInsert(dato);
+            if (creatorIdentifier != MyIdentifier) return ret;
+            if (Orchestrator != null ) Orchestrator.AppendNotification(new DTONotification
+            {
+                CreationDateTime = DateTime.UtcNow,
+                CreatorIdentifier = MyIdentifier,
+                Key =
+                  JsonConvert.SerializeObject(dato.Identifier),
+                NotificationDTOType = typeof(TDTOData).FullName,
+                NotificationType = NotificationType.UpdateOrInsert,
+                Status = PendingNotificationStatus.Queued
+            });
+            return ret;
         }
-
-        public abstract bool Delete(TDTOChiave Chiave);
-        public abstract TDTOChiave UpdateOrInsert(TDTOData Dato);
-
-        
 
     }
 }

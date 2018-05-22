@@ -35,13 +35,13 @@ namespace DataAccess
             return Utenti.Where(expression).ToList();
         }
 
-        public override bool Delete(DTOAuthenticationKey chiave)
+        protected override bool InnerDelete(DTOAuthenticationKey chiave)
         {
             Utenti.RemoveAll(x => x.Identifier.CompareTo(chiave) == 0);
             return true;
         }
 
-        public override DTOAuthenticationKey UpdateOrInsert(DTOAuthentication Dato)
+        protected override DTOAuthenticationKey InnerUpdateOrInsert(DTOAuthentication Dato)
         {
             //-->il match è per username e password
             var datoToUpdate = GetByID(Dato.Identifier);
@@ -64,7 +64,7 @@ namespace DataAccess
             var dto = GetByToken(token);
             if (dto == null) return false;
             dto.Token = string.Empty;
-            UpdateOrInsert(dto);
+            InnerUpdateOrInsert(dto);
             return true;
         }
         public DTOAuthentication DoLogin(DTOAuthentication chiave)

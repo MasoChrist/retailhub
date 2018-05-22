@@ -18,7 +18,7 @@ namespace ClientNotification
     public class DTOPendingNotification
     {
         public  DTONotification Notification { get; set; }
-        public  string Client { get; set; }
+        public  Guid Client { get; set; }
         public  DateTime CreationDateTime { get; set; }
         public  PendingNotificationStatus Status { get; set; }
     }

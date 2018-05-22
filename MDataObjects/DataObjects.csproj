@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,7 @@
     <Compile Include="Core\IDTO.cs" />
     <Compile Include="Core\NavBarItem.cs" />
     <Compile Include="DTOFunction.cs" />
+    <Compile Include="DTOListinoVendita.cs" />
     <Compile Include="DTONavBar.cs" />
     <Compile Include="DTOProdotto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

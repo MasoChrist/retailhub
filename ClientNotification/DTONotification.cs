@@ -13,7 +13,7 @@ namespace ClientNotification
     }
     public class DTONotification
     {
-        public  string CreatorIdentifier { get; set; }
+        public  Guid CreatorIdentifier { get; set; }
         public string NotificationDTOType { get; set; }
         public string Key { get; set; }
         
