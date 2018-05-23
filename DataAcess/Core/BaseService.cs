@@ -59,17 +59,18 @@ namespace DataAccess
                 var map = new GridMappingAttribute
                
                 {
-                    Caption =prop.Name,Name = prop.Name,Visible = false
+                    Caption =prop.Name,Name = prop.Name,Visible = true
                 };
                 foreach (var attr in prop.GetCustomAttributes(true))
                 {
                     var tattr = attr as GridMappingAttribute;
                     if (tattr != null)
                     {
-                        map.Caption = string.IsNullOrEmpty( tattr.Caption)?map.Name:tattr.Caption;
+                        map.Caption = string.IsNullOrEmpty(tattr.Caption) ? map.Name : tattr.Caption;
                         map.Visible = tattr.Visible;
                         break;
                     }
+                  
 
                 }
                 _visiblita.Add(map);

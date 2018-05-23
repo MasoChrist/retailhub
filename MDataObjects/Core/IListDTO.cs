@@ -26,7 +26,7 @@ namespace MDataObjects
     /// every DTO should use these lists to track the changes to commit in the datasource
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class DTOStatedList<T>: ICollection<T> where T:IDTO<IKey>
+    public class DTOStatedList<T>: IList<T> where T:IDTO<IKey>
     {
         private List<T> _deletedElements = new List<T>();
         private List<T> _updatedItems = new List<T>();
@@ -48,6 +48,13 @@ namespace MDataObjects
                 _deletedElements = value.Where(x => x.State == ItemState.Removed).Select(x => x.Item).ToList();
             }
         }
+        public  DTOStatedList
+
+        (IEnumerable<T> list)
+        {
+            _updatedItems = list.ToList();
+        }
+      
         #region ICollection
 
         public IEnumerator<T> GetEnumerator()
@@ -95,6 +102,31 @@ namespace MDataObjects
 
         public int Count => _updatedItems.Count;
         public bool IsReadOnly { get; } = false;
+        public int IndexOf(T item)
+        {
+            return _updatedItems.IndexOf(item);
+        }
+
+        public void Insert(int index, T item)
+        {
+            _updatedItems.Insert(index,item);
+            _deletedElements.RemoveAll(x => x.Identifier.Equals(item.Identifier));
+        }
+
+        public void RemoveAt(int index)
+        {
+            _deletedElements.Add(_updatedItems[index]);
+            _updatedItems.RemoveAt(index);
+        }
+
+        public T this[int index]
+        {
+            get { return _updatedItems[index]; }
+            set { _updatedItems[index] = value; }
+        }
+
         #endregion 
     }
+
+  
 }

@@ -90,13 +90,20 @@ namespace DataAccess
         protected  DTOProdotto mapTable(Products product)
         {
             if (product == null) return null;
-            return new DTOProdotto
+            var dto =
+             new DTOProdotto
             {
                 ID = product.ID,
                 Descrizione = product.Description,
                 SKU = product.SKU,
                 DescrizioneBreve = product.ShortDescription
+                
+
             };
+            dto.PrezziVendita = new DTOStatedList<DTOPrezzo>(product.Price.Select(x =>
+               new DTOPrezzo { Discount = x.Discount, IDProdotto = x.ProductID, IDListino = x.PriceListID, IsPredefinito = true, Price = x.Amount }).ToList())
+            return dto;
+
         }
 
         protected List<DTOProdotto> GetByContition(Func<Products, bool> expression)

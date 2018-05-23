@@ -30,7 +30,7 @@ namespace DataAccess
         {
             Utenti.Add(new DTOAuthentication{UserName = "mauro",Password = "mauro"});
         }
-        public override List<DTOAuthentication> GetByContition(Func<DTOAuthentication, bool> expression)
+        protected  List<DTOAuthentication> GetByContition(Func<DTOAuthentication, bool> expression)
         {
             return Utenti.Where(expression).ToList();
         }
@@ -89,6 +89,11 @@ namespace DataAccess
         {
 
             return GetByToken(token) != null;
+        }
+
+        public override DTOAuthentication GetByID(DTOAuthenticationKey chiave)
+        {
+            return Utenti.FirstOrDefault(x => x.Identifier.Equals(chiave));
         }
     }
 }

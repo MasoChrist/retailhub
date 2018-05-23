@@ -8,7 +8,7 @@ namespace EntityModel
     public partial class SqlServerEntitites : DbContext
     {
         public SqlServerEntitites()
-            : base("name=SqlServeEntitites")
+            : base("name=SqlServerEntitites")
         {
         }
 
