@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Data.Entity;
 using DataObjects;
 using EntityModel;
+using MDataObjects;
 
 namespace DataAccess
 {
@@ -22,6 +23,12 @@ namespace DataAccess
             {
                 if (!ctx.Products.Any(x => x.ID.Equals(Chiave.ID))) return false;
                 var dto = ctx.Products.FirstOrDefault(x => x.ID.Equals(Chiave.ID));
+                var prezzoService = new PrezzoService();
+                foreach (var prezzo in prezzoService.GetBySearcher(new DTOProdotto{Identifier = Chiave}))
+                {
+                    prezzoService.Delete(prezzo.Identifier,this.MyIdentifier);
+                }
+
                 ctx.Entry(dto).State = System.Data.Entity.EntityState.Deleted;
                 ctx.SaveChanges();
                 return true;
@@ -48,7 +55,18 @@ namespace DataAccess
                     tab.ID = Dato.ID;
                 }
                 ctx.SaveChanges();
+                var prezzoService = new PrezzoService();
+                foreach (var dtoPrezzo in Dato.PrezziAcquisto.StatedList.Union(Dato.PrezziVendita.StatedList))
+                {
+                    if(dtoPrezzo.State == ItemState.AddedOrUpdated)
+                     prezzoService.UpdateOrInsert( dtoPrezzo.Item, this.MyIdentifier);
+                    else
+                    {
+                        prezzoService.Delete(dtoPrezzo.Item, this.MyIdentifier);
+                    }
+                }
                 return Dato.Identifier;
+
             }
 
         }
@@ -69,7 +87,7 @@ namespace DataAccess
         }
 
 
-        public DTOProdotto mapTable(Products product)
+        protected  DTOProdotto mapTable(Products product)
         {
             if (product == null) return null;
             return new DTOProdotto

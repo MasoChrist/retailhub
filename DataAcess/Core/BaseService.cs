@@ -20,10 +20,12 @@ namespace DataAccess
 
         //TODO: creatorIdentifier deve essere da qualche parte nei settings del programma e corrispondere a uno dei client nella rete
 
-        public Guid MyIdentifier => new Guid();
+        public Guid MyIdentifier { get; set; } = new Guid();
         
         private List<GridMappingAttribute> _visiblita;
         protected ClientNotificatorService Orchestrator { get; set; } = new ClientNotificatorService();
+
+        
 
         public virtual Dictionary<string, object> getValuesByName(TDTOData dato)
         {

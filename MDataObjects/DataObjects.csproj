@@ -46,10 +46,12 @@
     <Compile Include="Core\DTOAuthentication.cs" />
     <Compile Include="Core\GridMapping.cs" />
     <Compile Include="Core\IDTO.cs" />
+    <Compile Include="Core\IListDTO.cs" />
     <Compile Include="Core\NavBarItem.cs" />
     <Compile Include="DTOFunction.cs" />
     <Compile Include="DTOListinoVendita.cs" />
     <Compile Include="DTONavBar.cs" />
+    <Compile Include="DTOPrezzoVendita.cs" />
     <Compile Include="DTOProdotto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

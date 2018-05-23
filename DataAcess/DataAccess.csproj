@@ -51,6 +51,7 @@
     <Compile Include="Core\ISearchable.cs" />
     <Compile Include="Core\ISyncronizable.cs" />
     <Compile Include="NavBarService.cs" />
+    <Compile Include="PrezzoService.cs" />
     <Compile Include="ProdottoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

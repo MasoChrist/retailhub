@@ -5,9 +5,9 @@ namespace EntityModel
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class SqlServeEntitites : DbContext
+    public partial class SqlServerEntitites : DbContext
     {
-        public SqlServeEntitites()
+        public SqlServerEntitites()
             : base("name=SqlServeEntitites")
         {
         }

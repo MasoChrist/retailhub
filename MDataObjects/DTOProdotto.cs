@@ -1,5 +1,6 @@
 ﻿using System;
 using DataObjects.Core;
+using MDataObjects;
 
 namespace DataObjects
 {
@@ -12,14 +13,9 @@ namespace DataObjects
         public  string Descrizione { get; set; }
         public string DescrizioneBreve { get; set; }
         public  string SKU { get; set; }
+        public  DTOStatedList<DTOPrezzo> PrezziVendita { get; set; }
+        public  DTOStatedList<DTOPrezzo> PrezziAcquisto { get; set; }
 
-      
-        public object GetPropertyByName(string propName)
-        {
-            return typeof(DTOProdotto).GetProperty(propName).GetValue(this, null);
-        }
-
-       
     }
 
 
