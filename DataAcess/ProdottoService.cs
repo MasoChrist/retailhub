@@ -55,16 +55,8 @@ namespace DataAccess
                     tab.ID = Dato.ID;
                 }
                 ctx.SaveChanges();
-                var prezzoService = new PrezzoService();
-                foreach (var dtoPrezzo in Dato.PrezziAcquisto.StatedList.Union(Dato.PrezziVendita.StatedList))
-                {
-                    if(dtoPrezzo.State == ItemState.AddedOrUpdated)
-                     prezzoService.UpdateOrInsert( dtoPrezzo.Item, this.MyIdentifier);
-                    else
-                    {
-                        prezzoService.Delete(dtoPrezzo.Item, this.MyIdentifier);
-                    }
-                }
+               
+               
                 return Dato.Identifier;
 
             }
@@ -100,8 +92,7 @@ namespace DataAccess
                 
 
             };
-            dto.PrezziVendita = new DTOStatedList<DTOPrezzo>(product.Price.Select(x =>
-               new DTOPrezzo { Discount = x.Discount, IDProdotto = x.ProductID, IDListino = x.PriceListID, IsPredefinito = true, Price = x.Amount }).ToList())
+         
             return dto;
 
         }
