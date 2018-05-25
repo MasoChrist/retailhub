@@ -48,11 +48,18 @@
     <Compile Include="Core\IDTO.cs" />
     <Compile Include="Core\IListDTO.cs" />
     <Compile Include="Core\NavBarItem.cs" />
+    <Compile Include="DTOAliquotaIva.cs" />
+    <Compile Include="DTOBarcode.cs" />
     <Compile Include="DTOFunction.cs" />
     <Compile Include="DTOListinoVendita.cs" />
     <Compile Include="DTONavBar.cs" />
+    <Compile Include="DTOPermessiProdotti.cs" />
     <Compile Include="DTOPrezzoVendita.cs" />
     <Compile Include="DTOProdotto.cs" />
+    <Compile Include="DTOProdottoDiListino.cs" />
+    <Compile Include="DTOProdottoInventariale.cs" />
+    <Compile Include="DTOTipoAttributo.cs" />
+    <Compile Include="DTOValoriAttibuto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

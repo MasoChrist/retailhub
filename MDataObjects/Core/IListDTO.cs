@@ -48,11 +48,9 @@ namespace MDataObjects
                 _deletedElements = value.Where(x => x.State == ItemState.Removed).Select(x => x.Item).ToList();
             }
         }
-        public  DTOStatedList
-
-        (IEnumerable<T> list)
+        public  DTOStatedList(IEnumerable<T> list)
         {
-            _updatedItems = list.ToList();
+        _updatedItems = list.ToList();
         }
       
         #region ICollection
@@ -128,5 +126,13 @@ namespace MDataObjects
         #endregion 
     }
 
+    public static class DTOStatedListExtensions
+    {
+        public static void EntryState<T>(this DTOStatedList<T> myList, T entry, ItemState state) where T : IDTO<IKey>
+        {
+            if(state == ItemState.AddedOrUpdated) myList.Add(entry);
+            if (state == ItemState.Removed) myList.Remove(entry);
+        }
+    }
   
 }

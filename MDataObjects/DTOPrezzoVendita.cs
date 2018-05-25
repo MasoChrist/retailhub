@@ -12,12 +12,12 @@ namespace MDataObjects
     public class DTOPrezzoKey : IKey
     {
         public  Guid IDListino { get; set; }
-        public  Guid IDProdotto { get; set; }
+        public  Guid IDProdottoListino { get; set; }
         public int CompareTo(object obj)
         {
             var td = obj as DTOPrezzoKey;
             if (td == null) return -1;
-            return td.IDListino.CompareTo(IDListino)  | td.IDProdotto.CompareTo(IDProdotto);
+            return td.IDListino.CompareTo(IDListino)  | td.IDProdottoListino.CompareTo(IDProdottoListino);
         }
     }
     public class DTOPrezzo: DTOPrezzoKey ,IDTO<DTOPrezzoKey>
@@ -30,7 +30,7 @@ namespace MDataObjects
             new DTOPrezzoKey
             {
                 IDListino = this.IDListino,
-                IDProdotto = this.IDProdotto
+                IDProdottoListino = this.IDProdottoListino
             };
     }
 }

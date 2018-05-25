@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Authentication;
 using DataAccess;
 using DataObjects;
+using TestAngular.Models;
 
 namespace TestAngular.Controllers
 {
@@ -17,7 +18,7 @@ namespace TestAngular.Controllers
        
         public IHttpActionResult GetByDtoSerarch(DTOProdottoSearch search)
         {
-            return Ok(Service.GetBySearcher(search));
+            return Ok(Service.GetBySearcher(search).Select(DTOListaProdotti.Map));
         }
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/DeleteProdottoByID")]

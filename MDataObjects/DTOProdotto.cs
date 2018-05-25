@@ -13,8 +13,7 @@ namespace DataObjects
         public  string Descrizione { get; set; }
         public string DescrizioneBreve { get; set; }
         public  string SKU { get; set; }
-        public  DTOStatedList<DTOPrezzo> PrezziVendita { get; set; }
-        public  DTOStatedList<DTOPrezzo> PrezziAcquisto { get; set; }
+        public  DTOStatedList<DTOProdottoDiListino> ProdottiDiListino { get; set; }
 
     }
 

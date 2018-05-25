@@ -15,15 +15,12 @@ namespace DataObjects
         TKey Identifier { get; }
 
     }
-
     public class GuidKey : IKey
     {
         public  Guid ID { get; set; }
         public int CompareTo(object obj)
-        {
-           
-                return ID.CompareTo((obj as GuidKey)?.ID);
-           
+        {      
+                return ID.CompareTo((obj as GuidKey)?.ID);  
         }
     }
     public abstract  class BaseGuidIdentifiedDTO: GuidKey,IDTO<GuidKey>,IKey
