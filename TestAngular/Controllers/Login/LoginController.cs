@@ -10,12 +10,15 @@ using DataObjects;
 namespace TestAngular.Controllers.Login
 {
    
-    public class LoginController : BaseController<AuthenticationService, DTOAuthentication, DTOAuthenticationKey>
+    public class LoginController : ApiController
     {
+
+        protected MAuthentication.AuthenticationService Service = new MAuthentication.AuthenticationService();
+
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/DoLogin")]
         [System.Web.Mvc.AllowAnonymous]
-        public IHttpActionResult Login(DTOAuthentication authentication)
+        public IHttpActionResult Login(MAuthentication.DTOAuthenticationRequest authentication)
         {
 
             return Ok(Service.DoLogin(authentication));

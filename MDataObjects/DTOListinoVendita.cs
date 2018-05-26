@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MDataObjects
+namespace DataObjects
 {
 
     
-    public class DTOListinoVendita
+    public class DTOListino:BaseGuidIdentifiedDTO
     {
-        public  Guid IDListino { get; set; }
-
+        public string Nome { get; set; }
+        public DateTime? DataInizioValidita;
+        public DateTime? DataFineValidita;
+       
     }
 }

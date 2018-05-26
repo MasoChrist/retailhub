@@ -11,7 +11,7 @@ namespace Authentication
     public class ApiAuthorizeAttribute: System.Web.Http.AuthorizeAttribute
     {
         public static string UserNotLoggedController { get; set; } = "loginview";
-        private readonly AuthenticationService _service = new AuthenticationService();
+        private readonly MAuthentication.AuthenticationService _service = new MAuthentication.AuthenticationService();
 
         public static bool SkipAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
@@ -42,10 +42,11 @@ namespace Authentication
     
         private   bool Authorize(HttpActionContext action)
         {
-            if (action.Request.Headers.TryGetValues("Token", out var values))
+            if (action.Request.Headers.TryGetValues("Token", out var token))
             {
-                if (values.Any(x => _service.ValidateToken(x))) return true;
-               
+
+                return _service.ValidateToken(token.First());
+
             }
             return false;
         }
@@ -55,7 +56,7 @@ namespace Authentication
 
     public class WebAuthorizeAttribute : System.Web.Mvc.AuthorizeAttribute
     {
-        private readonly AuthenticationService _service = new AuthenticationService();
+        private readonly MAuthentication.AuthenticationService _service =new  MAuthentication.AuthenticationService();
         
         protected override bool AuthorizeCore(System.Web.HttpContextBase httpContext)
         {
@@ -67,8 +68,12 @@ namespace Authentication
 
             }
 
-                var token = httpContext.Request.Cookies["Token"]?.Value;   
-            return _service.ValidateToken(token);
+                var token = httpContext.Request.Cookies["Token"]?.Value;
+           if(!string.IsNullOrEmpty(token))
+            {
+                return _service.ValidateToken(token);
+            }
+            return false;
         }
 
         protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)

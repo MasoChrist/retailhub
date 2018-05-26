@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataObjects.Core;
 
 namespace DataObjects
@@ -11,14 +12,8 @@ namespace DataObjects
        
         public  string Descrizione { get; set; }
         public string DescrizioneBreve { get; set; }
-        public  string SKU { get; set; }
-
-      
-        public object GetPropertyByName(string propName)
-        {
-            return typeof(DTOProdotto).GetProperty(propName).GetValue(this, null);
-        }
-
+        public  List<DTOGruppoAttributi> AttributiDisponibili { get; set; }
+        public  List<DTOProdottoDiListino> ProdottiDiListino { get; set; }
        
     }
 

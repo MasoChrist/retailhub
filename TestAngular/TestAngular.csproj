@@ -299,6 +299,10 @@
       <Project>{0b9baac8-50d0-4bc2-a8b2-6b12067fd3e1}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityModel\EntityModel.csproj">
+      <Project>{A73F78E7-14B7-4339-934C-B493DFE9BA4F}</Project>
+      <Name>EntityModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MAuthentication\Authentication.csproj">
       <Project>{1e8ff2d2-dce1-4164-9304-58c2523b20ac}</Project>
       <Name>Authentication</Name>

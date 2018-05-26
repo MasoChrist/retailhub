@@ -21,5 +21,7 @@ namespace DataObjects
         public string Password { get; set; }
         public  string Token { get; set; }
         public DTOAuthenticationKey Identifier => new DTOAuthenticationKey { UserName = this.UserName};
+
+        public eDTOState State { get; set; } = eDTOState.InsertedModified;
     }
 }

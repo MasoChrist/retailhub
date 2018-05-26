@@ -14,14 +14,14 @@ namespace TestAngular.Controllers.Login
     public class LoginViewController :Controller
     {
       
-      private AuthenticationService Service=> new AuthenticationService();
+      //private AuthenticationService Service=> new AuthenticationService();
         
         [AllowAnonymous]
          public ActionResult Index()
 
         {      
             var token = ControllerContext.HttpContext.Request.Cookies["Token"]?.Value;
-            return View(Service.GetByToken(token));
+            return View();
         }
 
     }

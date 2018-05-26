@@ -18,12 +18,8 @@ namespace TestAngular.Controllers
         public ActionResult Index()
         {
            
-            var data = new ProdottoService();
-            var prodottomodel = new ProdottoViewModel
-            {
-                Visibilita = data.Visiblita,         
-            };
-            return View(prodottomodel);
+         //   var data = new ProdottoService();
+            return View();
         }
         
     }
