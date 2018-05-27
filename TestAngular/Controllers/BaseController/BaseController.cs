@@ -26,6 +26,7 @@ namespace TestAngular.Controllers
                     ///MUST Explode on no value or value not guid
                      CurrentIdentifier = (Guid)Convert.ChangeType(t.TabOpzioniPostazione.First(x => x.ID.Equals("PostazioneCorrente")), typeof(Guid));
                    return (TService) Activator.CreateInstance(typeof(TService), CurrentIdentifier, t);
+                    
                 }
 
             }

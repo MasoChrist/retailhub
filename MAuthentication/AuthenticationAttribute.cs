@@ -12,7 +12,7 @@ namespace Authentication
     {
         public static string UserNotLoggedController { get; set; } = "loginview";
         private readonly MAuthentication.AuthenticationService _service = new MAuthentication.AuthenticationService();
-
+        
         public static bool SkipAuthorization(System.Web.Http.Controllers.HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
@@ -35,6 +35,7 @@ namespace Authentication
             {
                 return;
             }
+
             HandleUnauthorizedRequest(filterContext);
         }
 
@@ -45,9 +46,23 @@ namespace Authentication
             if (action.Request.Headers.TryGetValues("Token", out var token))
             {
 
-                return _service.ValidateToken(token.First());
-
+                var status =  _service.ValidateToken(token.First());
+                if ((status.Error!=null))
+                {
+                    action.Response = new System.Net.Http.HttpResponseMessage
+                    {
+                        StatusCode = System.Net.HttpStatusCode.Forbidden,
+                        Content = new System.Net.Http.StringContent(status.Error.Error)
+                    };
+                    return false;
+                }
+                return true;
             }
+            action.Response = new System.Net.Http.HttpResponseMessage
+            {
+                StatusCode = System.Net.HttpStatusCode.Redirect,
+                Content = new System.Net.Http.StringContent("E' necessario effettuare il Login")
+            };
             return false;
         }
 
@@ -67,13 +82,20 @@ namespace Authentication
                     return true;
 
             }
-
-                var token = httpContext.Request.Cookies["Token"]?.Value;
+           var token = httpContext.Request.Cookies["Token"]?.Value;
            if(!string.IsNullOrEmpty(token))
             {
-                return _service.ValidateToken(token);
+                var status = _service.ValidateToken(token);
+                if (status.Error!=null)
+                {      
+                    //TODO: Se ThrottleRequest allora aspetto un poco e torno true
+                    return status.Error.ErrorCode== MAuthentication.eAuthenticationResponseErrorCode.ThrottleRequest ;
+                }
+                return true;
             }
+           
             return false;
+      
         }
 
         protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)
