@@ -20,3 +20,5 @@
 /TestAngular/obj/Debug
 /MAuthentication/obj/Debug
 /ClientNotificationDataObjects/obj/Debug
+bin
+obj

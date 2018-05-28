@@ -1,36 +1,25 @@
-﻿using System;
+﻿using DataObjects;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using DataObjects;
 
-namespace MDataObjects
+namespace DataObjects
 {
-
-    public class DTOProdottoDiListinoKey : IKey
+    /// <summary>
+    /// ogni prodotto di listino identifica univocamente un Prodotto con uno specifico set di Attributi.
+    /// Questa e' la base per documenti e magazzino
+    /// </summary>
+    public class DTOProdottoDiListino: BaseGuidIdentifiedDTO
     {
-        public  string SKU { get; set; }
-        public int CompareTo(object obj)
-        {
-            return (obj as DTOProdottoDiListinoKey)?.SKU.CompareTo(SKU) ?? -1;
-        }
-    }
-   
-    public class DTOProdottoDiListino : DTOProdottoDiListinoKey,IDTO<DTOProdottoDiListinoKey>
-    {
-        public DTOProdotto Prodotto { get; set; }
+       
 
-        //->1 per tipo di attibuto
-        public  DTOStatedList<DTOValoriAttibuto> Attributi { get; set; }
-        //->Univoco
-      
-        public DTOStatedList<DTOPrezzo> PrezziVendita { get; set; }
-
-        public  List<DTOPrezzo> PrezzoAcquisto { get; set; }
-        public DTOStatedList<DTOBarcode> Barcode { get; set; }
-
-        public DTOProdottoDiListinoKey Identifier => new DTOProdottoDiListinoKey {SKU = SKU};
+        public string SKU { get; set; }
+        public List<DTOPrezzo> PrezziVendita { get; set; }
+        public List<DTOPrezzo> PrezziAcquisto { get; set; }
+        public List<DTOValoreAttributo> Attributi { get; set; }
+        
 
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using DataObjects.Core;
-using MDataObjects;
 
 namespace DataObjects
 {
@@ -12,9 +12,9 @@ namespace DataObjects
        
         public  string Descrizione { get; set; }
         public string DescrizioneBreve { get; set; }
-        public  string SKU { get; set; }
-        public  DTOStatedList<DTOProdottoDiListino> ProdottiDiListino { get; set; }
-
+        public  List<DTOGruppoAttributi> AttributiDisponibili { get; set; }
+        public  List<DTOProdottoDiListino> ProdottiDiListino { get; set; }
+       
     }
 
 

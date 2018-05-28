@@ -20,12 +20,20 @@ namespace DataAccess
 
         //TODO: creatorIdentifier deve essere da qualche parte nei settings del programma e corrispondere a uno dei client nella rete
 
-        public Guid MyIdentifier { get; set; } = new Guid();
         
+        
+        protected Guid _myIdentifier;
+        protected EntityModel.RetailHubEntities _context;
+
+        public BaseService(Guid identifier, EntityModel.RetailHubEntities context)
+        {
+            _myIdentifier = identifier;
+            _context = context;
+
+        }
+
         private List<GridMappingAttribute> _visiblita;
         protected ClientNotificatorService Orchestrator { get; set; } = new ClientNotificatorService();
-
-        
 
         public virtual Dictionary<string, object> getValuesByName(TDTOData dato)
         {
@@ -59,18 +67,17 @@ namespace DataAccess
                 var map = new GridMappingAttribute
                
                 {
-                    Caption =prop.Name,Name = prop.Name,Visible = true
+                    Caption =prop.Name,Name = prop.Name,Visible = false
                 };
                 foreach (var attr in prop.GetCustomAttributes(true))
                 {
                     var tattr = attr as GridMappingAttribute;
                     if (tattr != null)
                     {
-                        map.Caption = string.IsNullOrEmpty(tattr.Caption) ? map.Name : tattr.Caption;
+                        map.Caption = string.IsNullOrEmpty( tattr.Caption)?map.Name:tattr.Caption;
                         map.Visible = tattr.Visible;
                         break;
                     }
-                  
 
                 }
                 _visiblita.Add(map);
@@ -90,10 +97,10 @@ namespace DataAccess
         public bool Delete(TDTOChiave chiave,Guid creatorIdentifier)
         {
             var ret = InnerDelete(chiave);
-            if (creatorIdentifier != MyIdentifier) return ret;
+            if (creatorIdentifier != _myIdentifier) return ret;
             if(Orchestrator!=null && ret) Orchestrator.AppendNotification( new DTONotification
             {
-                CreationDateTime =  DateTime.UtcNow, CreatorIdentifier = MyIdentifier, Key = 
+                CreationDateTime =  DateTime.UtcNow, CreatorIdentifier = _myIdentifier, Key = 
                 JsonConvert.SerializeObject(chiave), NotificationDTOType =  typeof (TDTOData).FullName, NotificationType = NotificationType.Delete, Status = PendingNotificationStatus.Queued
             });
             return ret;
@@ -102,11 +109,11 @@ namespace DataAccess
         public TDTOChiave UpdateOrInsert(TDTOData dato,Guid creatorIdentifier)
         {
             var ret = InnerUpdateOrInsert(dato);
-            if (creatorIdentifier != MyIdentifier) return ret;
+            if (creatorIdentifier != _myIdentifier) return ret;
             if (Orchestrator != null ) Orchestrator.AppendNotification(new DTONotification
             {
                 CreationDateTime = DateTime.UtcNow,
-                CreatorIdentifier = MyIdentifier,
+                CreatorIdentifier = _myIdentifier,
                 Key =
                   JsonConvert.SerializeObject(dato.Identifier),
                 NotificationDTOType = typeof(TDTOData).FullName,

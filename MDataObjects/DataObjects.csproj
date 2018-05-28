@@ -7,7 +7,7 @@
     <ProjectGuid>{F6837BA6-EF9C-4806-8338-1157462A9D75}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MDataObjects</RootNamespace>
+    <RootNamespace>DataObjects</RootNamespace>
     <AssemblyName>DataObjects</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -46,20 +46,15 @@
     <Compile Include="Core\DTOAuthentication.cs" />
     <Compile Include="Core\GridMapping.cs" />
     <Compile Include="Core\IDTO.cs" />
-    <Compile Include="Core\IListDTO.cs" />
     <Compile Include="Core\NavBarItem.cs" />
-    <Compile Include="DTOAliquotaIva.cs" />
-    <Compile Include="DTOBarcode.cs" />
     <Compile Include="DTOFunction.cs" />
+    <Compile Include="DTOGruppoAttributi.cs" />
     <Compile Include="DTOListinoVendita.cs" />
     <Compile Include="DTONavBar.cs" />
-    <Compile Include="DTOPermessiProdotti.cs" />
-    <Compile Include="DTOPrezzoVendita.cs" />
+    <Compile Include="DTOPrezzo.cs" />
     <Compile Include="DTOProdotto.cs" />
     <Compile Include="DTOProdottoDiListino.cs" />
-    <Compile Include="DTOProdottoInventariale.cs" />
-    <Compile Include="DTOTipoAttributo.cs" />
-    <Compile Include="DTOValoriAttibuto.cs" />
+    <Compile Include="DTOValoreAttributo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

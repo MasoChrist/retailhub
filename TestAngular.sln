@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAngular", "TestAngular\TestAngular.csproj", "{4A24FF87-AA3B-426F-9E6E-D855ADBE06DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetailHubWeb", "TestAngular\RetailHubWeb.csproj", "{4A24FF87-AA3B-426F-9E6E-D855ADBE06DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "MAuthentication\Authentication.csproj", "{1E8FF2D2-DCE1-4164-9304-58C2523B20AC}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientNotification", "ClientNotification\ClientNotification.csproj", "{65D12D5C-9481-4178-A281-4F1791431C86}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityModel", "EntityModel\EntityModel.csproj", "{A73F78E7-14B7-4339-934C-B493DFE9BA4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Options", "Options\Options.csproj", "{9B254440-FAA2-445D-9E73-AF8958124AAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A73F78E7-14B7-4339-934C-B493DFE9BA4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B254440-FAA2-445D-9E73-AF8958124AAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B254440-FAA2-445D-9E73-AF8958124AAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B254440-FAA2-445D-9E73-AF8958124AAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B254440-FAA2-445D-9E73-AF8958124AAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

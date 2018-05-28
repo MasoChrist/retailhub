@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="71da4df28467441e8f9fa0e948f70736" Name="Diagram1">
+        <EntityTypeShape EntityType="RetailHubModel.tabGruppoAttributi" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabListini" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabPrezzoProdottoDiListino" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabProdotti" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabProdottiDiListino" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabProdottiToGruppoAttributi" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RetailHubModel.tabSetAttributiProdottoListino" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="RetailHubModel.FK_tabProdottiToGruppoAttributi_tabGruppoAttributi" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_tabSetAttributiProdottoListino_tabGruppiAttributi" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_tabPrezzoProdottoDiListino_ToListino" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_tabPrezzoProdottoDiListino_ToProdottoDiListino" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_ProdottiDiListino_tabProdotti" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_tabProdottiToGruppoAttributi_tabProdotti" ManuallyRouted="false" />
+        <AssociationConnector Association="RetailHubModel.FK_tabSetAttributiProdottoListino_tabProdottiListino" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RetailHubModel.TabOpzioniPostazione" Width="1.5" PointX="7.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -20,9 +20,9 @@ namespace TestAngular.Models
                 Descrizione = prodotto.Descrizione,
                 DescrizioneBreve = prodotto.DescrizioneBreve
                 ,
-                PrezzoAcquisto = prodotto?.PrezziAcquisto?.FirstOrDefault()?.Price ?? 0,
+              //  PrezzoAcquisto = prodotto?.PrezziAcquisto?.FirstOrDefault()?.Price ?? 0,
 
-                PrezzoVendita = prodotto?.PrezziVendita?.FirstOrDefault()?.Price ?? 0,   ScontoAcquisto = 0,ScontoVendita = 0,SKU = prodotto.SKU
+                //PrezzoVendita = prodotto?.PrezziVendita?.FirstOrDefault()?.Price ?? 0,   ScontoAcquisto = 0,ScontoVendita = 0,SKU = prodotto.SKU
 
             };
         }

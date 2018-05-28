@@ -58,6 +58,7 @@
     <Compile Include="DTONotificationToClient.cs" />
     <Compile Include="DTOPendingNotifications.cs" />
     <Compile Include="IOrchestrator.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NotificationQueue.cs" />
     <Compile Include="NotificationRules.cs" />
     <Compile Include="NotificationToClient.cs" />
@@ -67,6 +68,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notification.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

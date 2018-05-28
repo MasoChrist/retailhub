@@ -25,7 +25,7 @@ namespace TestAngular.Controllers
         [ApiAuthorize]
         public IHttpActionResult DeleteProdotto(GuidKey key)
         {
-            return Ok(Service.Delete(key, Service.MyIdentifier));
+            return Ok(Service.Delete(key, CurrentIdentifier));
         }
     }
 }

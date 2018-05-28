@@ -13,7 +13,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TestAngular</RootNamespace>
+    <RootNamespace>RetailHubWeb</RootNamespace>
     <AssemblyName>TestAngular</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
@@ -299,6 +299,10 @@
       <Project>{0b9baac8-50d0-4bc2-a8b2-6b12067fd3e1}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EntityModel\EntityModel.csproj">
+      <Project>{A73F78E7-14B7-4339-934C-B493DFE9BA4F}</Project>
+      <Name>EntityModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MAuthentication\Authentication.csproj">
       <Project>{1e8ff2d2-dce1-4164-9304-58c2523b20ac}</Project>
       <Name>Authentication</Name>
@@ -306,6 +310,10 @@
     <ProjectReference Include="..\MDataObjects\DataObjects.csproj">
       <Project>{f6837ba6-ef9c-4806-8338-1157462a9d75}</Project>
       <Name>DataObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Options\Options.csproj">
+      <Project>{9b254440-faa2-445d-9e73-af8958124aad}</Project>
+      <Name>Options</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
