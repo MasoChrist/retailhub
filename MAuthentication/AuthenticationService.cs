@@ -6,33 +6,20 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
+using Options;
 
 namespace MAuthentication
 {
     public class AuthenticationService
     {
 
-        protected int MilisecondsThresold //todo: can be an option
-        {
-            get
-            {
-                return 1000;
-            }
-        }
-        protected int TokenValidityDate //todo: can be an option
-        {
-            get
-            {
-                return 1;
-            }
-        }
+      protected  Options.ServerOptions Options = new ServerOptions();
         protected string encrypt(string strToEncrypt)
         {
             using (var context = new MAuthentication.RetailHubAuthenticationContext())
             {
                 var plaintext = Encoding.ASCII.GetBytes(strToEncrypt);
-                byte[] entropy = Encoding.ASCII.GetBytes(context.TabOpzioniPostazione.FirstOrDefault(x => x.ID.Equals("entropyString"))?.valore);
-                var encrypted = ProtectedData.Protect(plaintext, entropy, DataProtectionScope.LocalMachine);
+                var encrypted = ProtectedData.Protect(plaintext, Options.CryptEntropyValues.OptionValue, DataProtectionScope.LocalMachine);
                 return Encoding.ASCII.GetString(encrypted);
             }
         }
@@ -163,8 +150,8 @@ namespace MAuthentication
                 context.SaveChanges();
              
             }
-            if (user.LastRequestTime.HasValue && (DateTime.UtcNow - user.LastRequestTime.Value).Days > TokenValidityDate ||
-                user.CreationDateTime.HasValue && (DateTime.UtcNow - user.CreationDateTime.Value).Days > TokenValidityDate)
+            if (user.LastRequestTime.HasValue && (DateTime.UtcNow - user.LastRequestTime.Value).Days > Options.TokenValidityDate.OptionValue ||
+                user.CreationDateTime.HasValue && (DateTime.UtcNow - user.CreationDateTime.Value).Days > Options.TokenValidityDate.OptionValue)
                 return new DTOAuthenticationResponse
                 {
                     Error = new DTOAuthenticationResponseError
@@ -178,13 +165,13 @@ namespace MAuthentication
             if (user.LastRequestTime.HasValue)
             {
                 TimeSpan span = DateTime.UtcNow - user.LastRequestTime.Value;
-                if (span.Milliseconds < this.MilisecondsThresold)
+                if (span.Milliseconds < Options.MilisecondsThresold.OptionValue)
                 {
                     return new DTOAuthenticationResponse
                     {
                         Error = new DTOAuthenticationResponseError
                         {
-                            Error = string.Format("Riprova in {0} secondi", (this.MilisecondsThresold - span.Milliseconds / 1000.0)),
+                            Error = string.Format("Riprova in {0} secondi", (Options.MilisecondsThresold.OptionValue - span.Milliseconds / 1000.0)),
                             ErrorCode = eAuthenticationResponseErrorCode.ThrottleRequest
                         }
                     };

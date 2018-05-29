@@ -6,14 +6,15 @@ using System.Web.Mvc;
 using DataAccess;
 using DataObjects;
 using DataObjects.Core;
+using RetailHubWeb.Controllers;
 
 
 namespace TestAngular.Controllers
 {
-    
-    public class ProdottoViewController : Controller
+ 
+    public class ProdottoViewController :BaseController<ProdottoService,DTOProdotto,GuidKey>
     {
-      
+
         // GET: ProdottoView
         public ActionResult Index()
         {
@@ -21,13 +22,15 @@ namespace TestAngular.Controllers
          //   var data = new ProdottoService();
             return View();
         }
-        
-    }
 
-    public class ProdottoViewModel
-    {
- 
-        public List<GridMappingAttribute> Visibilita { get; set; }
-        public DTOProdottoSearch Searcher { get; set; }
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Edit(Guid? idProdotto )
+        {
+            return PartialView(null);
+            return PartialView(Service.GetByID(new GuidKey{ID = idProdotto??Guid.Empty}));
+        }
+
+        
     }
 }

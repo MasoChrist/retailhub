@@ -91,6 +91,10 @@
       <Project>{f6837ba6-ef9c-4806-8338-1157462a9d75}</Project>
       <Name>DataObjects</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Options\Options.csproj">
+      <Project>{9b254440-faa2-445d-9e73-af8958124aad}</Project>
+      <Name>Options</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="AuthenticationModel.edmx">

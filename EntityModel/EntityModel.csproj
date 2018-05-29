@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RetailHubModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -91,7 +92,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <EntityDeploy Include="SqlServerEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

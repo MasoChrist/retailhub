@@ -46,6 +46,7 @@ namespace ClientNotification
                     tabClient.NotificationID = tabNotifica.ID;
                     tabClient.NotificationQueue = tabNotifica;
                     ctx.NotificationToClient.Add(tabClient);
+                    //ctx.Entry(tabClient).State = EntityState.Added;
                 }
                 ctx.SaveChanges();
             }

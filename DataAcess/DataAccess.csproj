@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AuthenticationService.cs" />
     <Compile Include="Core\BaseService.cs" />
     <Compile Include="Core\ISearchable.cs" />
     <Compile Include="Core\ISyncronizable.cs" />
     <Compile Include="NavBarService.cs" />
+    <Compile Include="PrezzoService.cs" />
     <Compile Include="ProdottoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

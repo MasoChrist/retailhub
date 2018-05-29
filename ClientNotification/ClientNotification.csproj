@@ -58,6 +58,7 @@
     <Compile Include="DTONotificationToClient.cs" />
     <Compile Include="DTOPendingNotifications.cs" />
     <Compile Include="IOrchestrator.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="NotificationQueue.cs" />
     <Compile Include="NotificationRules.cs" />
     <Compile Include="NotificationToClient.cs" />
