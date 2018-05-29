@@ -188,6 +188,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BaseController\BaseApiController.cs" />
     <Compile Include="Controllers\BaseController\BaseController.cs" />
     <Compile Include="Controllers\FunctionBar\FunctionBarViewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -275,10 +276,12 @@
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\NavigationBarView\index.cshtml" />
     <Content Include="Views\LoginView\Index.cshtml" />
+    <Content Include="Views\ProdottoView\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Base\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\FunctionBarView\" />
   </ItemGroup>
   <ItemGroup>

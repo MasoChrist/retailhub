@@ -11,7 +11,8 @@ using TestAngular.Models;
 
 namespace TestAngular.Controllers
 {
-    public class ProdottoController : BaseController<ProdottoService,DTOProdotto,GuidKey>
+
+    public class ProdottoController : BaseApiController<ProdottoService,DTOProdotto,GuidKey>
     {
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/GetProdottoByDTOSearch")]
@@ -25,7 +26,7 @@ namespace TestAngular.Controllers
         [ApiAuthorize]
         public IHttpActionResult DeleteProdotto(GuidKey key)
         {
-            return Ok(Service.Delete(key, CurrentIdentifier));
+            return Ok(Service.Delete(key, _options.PostazioneCorrente.OptionValue));
         }
     }
 }
