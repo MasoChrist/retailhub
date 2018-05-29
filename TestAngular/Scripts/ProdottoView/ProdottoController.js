@@ -16,23 +16,26 @@
         DeleteItems: function(prodottiToDelete) {
             for (i = 0; i < prodottiToDelete.length; i++) {
                 debugger;
-                $.ajax({
-                    headers: { 'Token': getToken() },
-                    type: "POST",
-                    data: JSON.stringify(prodottiToDelete[i]["Identifier"]),
-                    url: "../api/DeleteProdottoByID",
-                    contentType: "application/json",
-                   
-                    error: function (xhr, error) {
-                        debugger;
-                        console.debug(xhr); console.debug(error);
-                    }
-                });
-                var clientIndex = $.inArray(prodottiToDelete[i], this.ListaProdotti);
-                this.ListaProdotti.splice(clientIndex, 1);
+                webApiCall("POST", "DeleteProdottoByID", prodottiToDelete[i]["Identifier"]).then(
+                    function () {
+                        var clientIndex = $.inArray(prodottiToDelete[i], this.ListaProdotti);
+                        this.ListaProdotti.splice(clientIndex, 1);
+                    });
                 
             }
-        }
+        },
+        GetProdottoByDTOSearch:function(description) {
+           
+            debugger;
+            var searcher = {
+                PartialDescription: description
+            };
+            debugger;
+            webApiCall("POST", "GetProdottoByDTOSearch", searcher).then(function (newData) {
+                debugger;
+                LoadGrid2(newData);
+            });
+}
        
     };
     window.Prodotti = prodotti;

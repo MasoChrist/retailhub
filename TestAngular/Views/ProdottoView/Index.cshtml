@@ -84,27 +84,7 @@
         }
 
 
-    function getData() {
-        var description = document.getElementById("txtCodice").value;
-        debugger;
-        var searcher = {
-            PartialDescription: description
-
-        };
-        debugger;
-        $.ajax({
-            headers: { 'Token': getToken() },
-            type: "POST",
-            data: JSON.stringify(searcher),
-            url: "../api/GetProdottoByDTOSearch",
-            contentType: "application/json",
-            success: function (newData) { LoadGrid2(newData); },
-            error: function (xhr, error) {
-                debugger;
-                console.debug(xhr); console.debug(error);
-            }
-        });
-    }
+    
     var selectedItems = [];
 
     var selectItem = function (item) {
@@ -130,7 +110,10 @@
     };
 
 
+        function getData() {
+            Prodotti.GetProdottoByDTOSearch(document.getElementById("txtPartialDescription").value);
 
+        }
 
     </script>
 }
@@ -150,7 +133,7 @@
 {
     <div style="border-color: black; border-style: solid;">
         <b>Ricerca Prodotti</b>
-        <input type="text" id="txtCodice" style="width:100% " />
+        <input type="text" id="txtPartialDescription" style="width:100% " />
         <input type="button" value="Cerca" onclick="getData()" />
     </div>
 
