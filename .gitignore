@@ -20,3 +20,9 @@
 /TestAngular/obj/Debug
 /MAuthentication/obj/Debug
 /ClientNotificationDataObjects/obj/Debug
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages
