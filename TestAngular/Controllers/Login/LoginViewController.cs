@@ -7,11 +7,13 @@ using System.Web.Mvc;
 using Authentication;
 using DataAccess;
 using DataObjects;
+using MAuthentication;
 
-namespace TestAngular.Controllers.Login
+
+namespace TestAngular.Controllers
 {
     [AllowAnonymous]
-    public class LoginViewController :Controller
+    public class LoginViewController : Controller
     {
       
       //private AuthenticationService Service=> new AuthenticationService();
@@ -21,7 +23,10 @@ namespace TestAngular.Controllers.Login
 
         {      
             var token = ControllerContext.HttpContext.Request.Cookies["Token"]?.Value;
-            return View();
+            var service = new AuthenticationService();
+            var dto = service.ValidateToken(token);
+
+            return View(dto);
         }
 
     }

@@ -10,7 +10,10 @@ namespace Options
     {
         public  ServerConfiguration<int> MilisecondsThresold = new ServerConfiguration<int>("MilisecondsThresold",1000);
         public  ServerConfiguration<int> TokenValidityDate = new ServerConfiguration<int>("TokenValidityDate",1);
-        public  ServerConfiguration<byte[]> CryptEntropyValues = new ServerConfiguration<byte[]>("CryptEntropyValues", new byte[0]); 
+        public  ServerConfiguration<string> CryptEntropyValues = new ServerConfiguration<string>("CryptEntropyValues", string.Empty); 
         public  ServerConfiguration<Guid> PostazioneCorrente = new ServerConfiguration<Guid>("PostazioneCorrente",Guid.Empty);
+        public  ServerConfiguration<byte[]> SaltStringBytes = new ServerConfiguration<byte[]>("SaltStringBytes",new byte[0]);
+        public ServerConfiguration<byte[]> IvStringBytes = new ServerConfiguration<byte[]>("IvStringBytes", new byte[0]);
+
     }
 }

@@ -34,13 +34,20 @@ namespace Options
                 if(!_optionCache.TryGetValue(_chiaveImpostazione,out valore))
                     throw  new Exception("Automation error: something really weird just append: no option with name " +_chiaveImpostazione + " found");
                 if (valore == null) return _valoreDefault;
+                if (typeof(T) == typeof(byte[]))
+                    return(T) Convert.ChangeType(Convert.FromBase64String(valore),typeof(T));
                 return (T) Convert.ChangeType(valore, typeof(T));
 
             }
             set
             {
+                var nuovovalore = string.Empty;
+                if (typeof(T) == typeof(byte[]))
+                    nuovovalore = Convert.ToBase64String(value as byte[] ?? new byte[0]);
+                else
+                    nuovovalore = (string)Convert.ChangeType(value, typeof(string));
                 if (_optionCache.ContainsKey(_chiaveImpostazione))
-                    _optionCache[_chiaveImpostazione] = (string) Convert.ChangeType(value, typeof(string));
+                    _optionCache[_chiaveImpostazione] = nuovovalore;
                 using (var ctx = new Options.RetailHubOptions())
                 {
 
@@ -57,9 +64,12 @@ namespace Options
                     {
                         ctx.Entry(tab).State = EntityState.Modified;
                     }
-                    tab.Valore = (string)Convert.ChangeType(value, typeof(string));
+                    //if (typeof(T) == typeof(byte[]))
+                    tab.Valore = nuovovalore;
+                    // else
+                    //   tab.Valore = (string) Convert.ChangeType(value, typeof(string));
 
-
+                    ctx.SaveChanges();
                 }
             }
         }
