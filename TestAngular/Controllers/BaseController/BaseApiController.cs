@@ -23,7 +23,7 @@ namespace TestAngular.Controllers
         {
             get
             {
-                using (var t = new RetailHubEntities())
+                using (var t = new SqlServerEntities())
                 {
                     
                    return (TService) Activator.CreateInstance(typeof(TService), _options.PostazioneCorrente.OptionValue, t);

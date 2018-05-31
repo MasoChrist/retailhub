@@ -1,12 +1,12 @@
-﻿@model TestAngular.Controllers.ProdottoViewModel
+﻿@model  TestAngular.Models.DTOListaProdottiModel
 @using System.ComponentModel
 @using DataObjects
-@using DataObjects.Core
+
 @using GridMvc.Html
 
 @{
 
-    var vis = Model.Visibilita.ToList();
+    var vis = Model.DTOListaProdotti.Visibilita;
     ViewBag.Title = "Elenco Prodotti";
 }
 @section Scripts
@@ -38,13 +38,13 @@
 
               rowClick: function (args) {
                   // save selected item
-                  selectedItem = args.item;
+               selectedItem = args.item;
 
                   // save selected row
-                  $selectedRow = $(args.event.target).closest("tr");
+                $selectedRow = $(args.event.target).closest("tr");
 
                   // add class to highlight row
-                  $selectedRow.backgroundColor = "blue";
+                $selectedRow.backgroundColor = "blue";
 
               },
               fields: [
@@ -85,29 +85,30 @@
 
 
     
-    var selectedItems = [];
+        var selectedItems = [];
 
-    var selectItem = function (item) {
-        selectedItems.push(item);
-    };
+        var selectItem = function (item) {
+            selectedItems.push(item);
+        };
 
-    var unselectItem = function (item) {
-        selectedItems = $.grep(selectedItems, function (i) {
-            return i !== item;
-        });
-    };
 
-    var deleteSelectedItems = function () {
-        debugger;
-            if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
-                return;
-        Prodotti.DeleteItems(selectedItems);
-        debugger;
+        var unselectItem = function (item) {
+            selectedItems = $.grep(selectedItems, function (i) {
+                return i !== item;
+            });
+        };
 
-            LoadGrid2(Prodotti.ListaProdotti);
-            selectedItems = [];
+        var deleteSelectedItems = function () {
+            debugger;
+                if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
+                    return;
+            Prodotti.DeleteItems(selectedItems);
+            debugger;
 
-    };
+                LoadGrid2(Prodotti.ListaProdotti);
+                selectedItems = [];
+
+        };
 
 
         function getData() {
@@ -140,4 +141,13 @@
     <div style="border-color: black; border-style: solid;">
         <button onclick="deleteSelectedItems()">Elimina Selezione</button>
     </div>
+    <div style="border-color: black; border-style: solid;">
+        <button onclick="editSelectedItem()">Modifica</button>
+    </div>
+<div style="border-color: black; border-style: solid;">
+    <button onclick="addNewItem()">Nuovo</button>
+</div>
+
+
+
 }

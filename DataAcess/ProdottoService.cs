@@ -14,7 +14,7 @@ namespace DataAccess
     {
         
 
-        public ProdottoService(Guid identifier, RetailHubEntities context) : base(identifier, context)
+        public ProdottoService(Guid identifier, SqlServerEntities context) : base(identifier, context)
         {
         }
 
@@ -22,12 +22,14 @@ namespace DataAccess
         {
 
             if (Chiave == null) return false;
-            using (var ctx = new EntityModel.RetailHubEntities())
+            using (var ctx = new EntityModel.SqlServerEntities())
             {
                 if (!ctx.tabProdotti.Any(x => x.ID.Equals(Chiave.ID))) return false;
 
-                var dto = ctx.tabProdotti.Include(a=>a.tabProdottiToGruppoAttributi).Include(b=>b.tabProdottiDiListino).FirstOrDefault(x => x.ID.Equals(Chiave.ID));
-                ctx.tabProdotti.Remove(dto);
+                var dto = ctx.tabProdotti.FirstOrDefault(x => x.ID.Equals(Chiave.ID) && !x.isDeleted);
+                //ctx.tabProdotti.Remove(dto);
+                if (dto == null) return false;
+                dto.isDeleted = true;
                 ctx.SaveChanges();
                 return true;
             }
@@ -35,7 +37,7 @@ namespace DataAccess
 
         protected override GuidKey InnerUpdateOrInsert(DTOProdotto Dato)
         {
-            using (var ctx = new EntityModel.RetailHubEntities())
+            using (var ctx = new EntityModel.SqlServerEntities())
             {
                 var tab = new tabProdotti();
                 if (!ctx.tabProdotti.Any(x => x.ID.Equals(Dato.ID)))
@@ -49,7 +51,7 @@ namespace DataAccess
                     ctx.Entry(tab).State = EntityState.Modified;
                     tab.Descrizione = Dato.Descrizione;
                     tab.DescrizioneBreve = Dato.DescrizioneBreve;
-                   
+                    tab.isDeleted = false;
                     tab.ID = Dato.ID;
 
 
@@ -67,7 +69,7 @@ namespace DataAccess
 
         public override DTOProdotto GetByID(GuidKey chiave)
         {
-            using (var ctx = new EntityModel.RetailHubEntities())
+            using (var ctx = new EntityModel.SqlServerEntities())
             {
                 return mapTable(ctx.tabProdotti.FirstOrDefault(x => x.ID.Equals(chiave.ID)));
             }
@@ -95,7 +97,7 @@ namespace DataAccess
 
         protected List<DTOProdotto> GetByContition(Func<tabProdotti, bool> expression)
         {
-            using (var ctx = new RetailHubEntities())
+            using (var ctx = new SqlServerEntities())
             {
                 return ctx.tabProdotti.Where(expression).ToList().Select(mapTable).ToList();
             }

@@ -1,18 +1,25 @@
 namespace EntityModel.Migrations
 {
+
+    /*
+        PM> Add-Migration Inheritance
+        PM> Enable-Migrations
+        PM> Update-Database
+         
+         */
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EntityModel.RetailHubEntities>
+    internal sealed class Configuration : DbMigrationsConfiguration<EntityModel.SqlServerEntities>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(EntityModel.RetailHubEntities context)
+        protected override void Seed(EntityModel.SqlServerEntities context)
         {
             //  This method will be called after migrating to the latest version.
 

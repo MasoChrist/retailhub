@@ -5,8 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using DataObjects;
-using DataObjects.Core;
+
 using RetailHubWeb.Controllers;
+using TestAngular.Models;
 
 
 namespace TestAngular.Controllers
@@ -20,14 +21,13 @@ namespace TestAngular.Controllers
         {
            
          //   var data = new ProdottoService();
-            return View();
+            return View(new DTOListaProdottiModel( string.Empty));
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public ActionResult Edit(Guid? idProdotto )
         {
-            return PartialView(null);
+         //   return PartialView(null);
             return PartialView(Service.GetByID(new GuidKey{ID = idProdotto??Guid.Empty}));
         }
 

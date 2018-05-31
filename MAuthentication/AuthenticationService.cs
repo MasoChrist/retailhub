@@ -299,7 +299,7 @@ namespace MAuthentication
             if (user.LastRequestTime.HasValue)
             {
                 TimeSpan span = DateTime.UtcNow - user.LastRequestTime.Value;
-                if (span.Milliseconds < Options.MilisecondsThresold.OptionValue)
+                if (span.TotalMilliseconds < Options.MilisecondsThresold.OptionValue)
                 {
                     return new DTOAuthenticationResponse
                     {

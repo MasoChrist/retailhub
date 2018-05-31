@@ -49,75 +49,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="baseEntityTable.cs" />
+    <Compile Include="Migrations\201805311132458_Inheritance.cs" />
+    <Compile Include="Migrations\201805311132458_Inheritance.Designer.cs">
+      <DependentUpon>201805311132458_Inheritance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805311138163_Inheritance1.cs" />
+    <Compile Include="Migrations\201805311138163_Inheritance1.Designer.cs">
+      <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RetailHubModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailHubModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="RetailHubModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="SqlServerEntities.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SqlServerEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="tabGruppoAttributi.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabListini.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="TabOpzioniPostazione.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabPrezzoProdottoDiListino.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabProdotti.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabProdottiDiListino.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabProdottiToGruppoAttributi.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="tabSetAttributiProdottoListino.cs">
-      <DependentUpon>RetailHubModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="SqlServerEntities.cs" />
+    <Compile Include="tabGruppoAttributi.cs" />
+    <Compile Include="tabListini.cs" />
+    <Compile Include="tabPrezzoProdottoDiListino.cs" />
+    <Compile Include="tabProdotti.cs" />
+    <Compile Include="tabProdottiDiListino.cs" />
+    <Compile Include="tabProdottiToGruppoAttributi.cs" />
+    <Compile Include="tabSetAttributiProdottoListino.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <EntityDeploy Include="SqlServerEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SqlServerEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="SqlServerEntities.edmx.diagram">
-      <DependentUpon>SqlServerEntities.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="RetailHubModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RetailHubModel.Context.cs</LastGenOutput>
-      <DependentUpon>SqlServerEntities.edmx</DependentUpon>
-    </Content>
-    <Content Include="RetailHubModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>RetailHubModel.cs</LastGenOutput>
-      <DependentUpon>SqlServerEntities.edmx</DependentUpon>
-    </Content>
+    <EmbeddedResource Include="Migrations\201805311132458_Inheritance.resx">
+      <DependentUpon>201805311132458_Inheritance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805311138163_Inheritance1.resx">
+      <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

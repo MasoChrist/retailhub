@@ -7,7 +7,7 @@ using System.Text;
 using ClientNotification;
 
 using DataObjects;
-using DataObjects.Core;
+
 using Newtonsoft.Json;
 
 namespace DataAccess
@@ -23,16 +23,16 @@ namespace DataAccess
         
         
         protected Guid _myIdentifier;
-        protected EntityModel.RetailHubEntities _context;
+        protected EntityModel.SqlServerEntities _context;
 
-        public BaseService(Guid identifier, EntityModel.RetailHubEntities context)
+        public BaseService(Guid identifier, EntityModel.SqlServerEntities context)
         {
             _myIdentifier = identifier;
             _context = context;
 
         }
 
-        private List<GridMappingAttribute> _visiblita;
+    
         protected ClientNotificatorService Orchestrator { get; set; } = new ClientNotificatorService();
 
         public virtual Dictionary<string, object> getValuesByName(TDTOData dato)
@@ -46,44 +46,11 @@ namespace DataAccess
                 }
             return dic;
         }
-        public List<GridMappingAttribute> Visiblita
-
-        {
-            get
-            {
-                if (_visiblita == null) getProperties();
-                return _visiblita;
-            }
-            
-        }
+       
 
         public string DataTypeIdentifier => typeof(TDTOData).ToString();
 
-        private void getProperties()
-        {
-            _visiblita = new List<GridMappingAttribute>();
-            foreach (var prop in typeof(TDTOData).GetProperties())
-            {
-                var map = new GridMappingAttribute
-               
-                {
-                    Caption =prop.Name,Name = prop.Name,Visible = false
-                };
-                foreach (var attr in prop.GetCustomAttributes(true))
-                {
-                    var tattr = attr as GridMappingAttribute;
-                    if (tattr != null)
-                    {
-                        map.Caption = string.IsNullOrEmpty( tattr.Caption)?map.Name:tattr.Caption;
-                        map.Visible = tattr.Visible;
-                        break;
-                    }
-
-                }
-                _visiblita.Add(map);
-            }
-            _visiblita = _visiblita.OrderBy(x => x.Order).ToList();
-        }
+        
 
 
 

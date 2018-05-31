@@ -75,9 +75,6 @@
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="DTOAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TabOpzioniPostazione.cs">
-      <DependentUpon>AuthenticationModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Users.cs">
       <DependentUpon>AuthenticationModel.tt</DependentUpon>
     </Compile>

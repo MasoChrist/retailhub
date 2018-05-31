@@ -18,16 +18,8 @@
           <Property Name="ActivationDate" Type="datetime" />
           <Property Name="LastRequestDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="TabOpzioniPostazione">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="valore" Type="nvarchar(max)" />
-        </EntityType>
         <EntityContainer Name="RetailHubModelStoreContainer">
           <EntitySet Name="Users" EntityType="Self.Users" Schema="Authentication" store:Type="Tables" />
-          <EntitySet Name="TabOpzioniPostazione" EntityType="Self.TabOpzioniPostazione" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -48,15 +40,7 @@
         </EntityType>
         <EntityContainer Name="RetailHubAuthenticationContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="Self.Users" />
-          <EntitySet Name="TabOpzioniPostazione" EntityType="RetailHubModel.TabOpzioniPostazione" />
         </EntityContainer>
-        <EntityType Name="TabOpzioniPostazione">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="valore" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -74,14 +58,6 @@
                 <ScalarProperty Name="Token" ColumnName="Token" />
                 <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
                 <ScalarProperty Name="LastRequestDate" ColumnName="LastRequestDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TabOpzioniPostazione">
-            <EntityTypeMapping TypeName="RetailHubModel.TabOpzioniPostazione">
-              <MappingFragment StoreEntitySet="TabOpzioniPostazione">
-                <ScalarProperty Name="valore" ColumnName="valore" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

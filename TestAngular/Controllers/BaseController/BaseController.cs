@@ -22,7 +22,7 @@ namespace RetailHubWeb.Controllers
         {
             get
             {
-                using (var t = new RetailHubEntities())
+                using (var t = new SqlServerEntities())
                 {
 
                     return
