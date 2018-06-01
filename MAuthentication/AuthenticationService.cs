@@ -284,8 +284,8 @@ namespace MAuthentication
                 context.SaveChanges();
              
             }
-            if (user.LastRequestTime.HasValue && (DateTime.UtcNow - user.LastRequestTime.Value).Days > Options.TokenValidityDate.OptionValue ||
-                user.CreationDateTime.HasValue && (DateTime.UtcNow - user.CreationDateTime.Value).Days > Options.TokenValidityDate.OptionValue)
+            if( (user.LastRequestTime.HasValue && (DateTime.UtcNow - user.LastRequestTime.Value).Days > Options.TokenValidityDate.OptionValue) &&
+                (user.CreationDateTime.HasValue && (DateTime.UtcNow - user.CreationDateTime.Value).Days > Options.TokenValidityDate.OptionValue))
                 return new DTOAuthenticationResponse
                 {
                     Error = new DTOAuthenticationResponseError

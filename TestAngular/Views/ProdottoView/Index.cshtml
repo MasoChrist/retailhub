@@ -1,4 +1,4 @@
-﻿@model  TestAngular.Models.DTOListaProdottiModel
+﻿@model  RetailHubWeb.Models.DTOListaProdottiModel
 @using System.ComponentModel
 @using DataObjects
 
@@ -20,37 +20,51 @@
     <script type="text/javascript" src="../../Scripts/ProdottoView/ProdottoController.js"></script>
 
     <script type="text/javascript">
-     function LoadGrid2(newdata) {
-        debugger;
-         Prodotti.ListaProdotti = newdata;
-         //Setta la proprietà JsGrid con l'oggettone
-          $("#jsGrid").jsGrid({
 
-              height: "98%",
-              width: "95%",
-            sorting: true,
-            autoload: false,
-            paging: false,
-             pageLoading: false,
-            filter:true,
-            controller:Prodotti
-              ,
+        $(document).ready(function () {
+            $("#dialog").dialog({
+                autoOpen: false,
+                modal: true,
+                height: 600,
+                open: function (ev, ui) {
+                    debugger;
+                    $('#myIframe').attr('src', '../Edit/' + selectedItems[0]);
+                }
+            });
+           
+      
+        });
+        function LoadGrid2(newdata) {
+            debugger;
+            Prodotti.ListaProdotti = newdata;
+            //Setta la proprietà JsGrid con l'oggettone
+            $("#jsGrid").jsGrid({
 
-              rowClick: function (args) {
-                  // save selected item
-               selectedItem = args.item;
+                height: "98%",
+                width: "95%",
+                sorting: true,
+                autoload: false,
+                paging: false,
+                pageLoading: false,
+                filter:true,
+                controller:Prodotti
+                ,
 
-                  // save selected row
-                $selectedRow = $(args.event.target).closest("tr");
+                rowClick: function (args) {
+                    // save selected item
+                    selectedItem = args.item;
 
-                  // add class to highlight row
-                $selectedRow.backgroundColor = "blue";
+                    // save selected row
+                    $selectedRow = $(args.event.target).closest("tr");
 
-              },
-              fields: [
+                    // add class to highlight row
+                    $selectedRow.backgroundColor = "blue";
+
+                },
+                fields: [
 
                 
-                @{
+                    @{
                     foreach (var t in vis)
                     {
                         if (t.Visible)
@@ -61,26 +75,26 @@
                         }
                     }
                 }
-                  {
-                      headerTemplate: function () {
-                          return "Selezione";
+                    {
+                        headerTemplate: function () {
+                            return "Selezione";
 
-                      },
-                      itemTemplate: function (_, item) {
-                          return $("<input>").attr("type", "checkbox")
-                              .prop("checked", $.inArray(item, selectedItems) > -1)
-                              .on("change", function () {
-                                  $(this).is(":checked") ? selectItem(item) : unselectItem(item);
-                              });
-                      },
-                      align: "center",
-                      width: 50
-                  }
-            ]
-        });
-         debugger;
+                        },
+                        itemTemplate: function (_, item) {
+                            return $("<input>").attr("type", "checkbox")
+                                .prop("checked", $.inArray(item, selectedItems) > -1)
+                                .on("change", function () {
+                                    $(this).is(":checked") ? selectItem(item) : unselectItem(item);
+                                });
+                        },
+                        align: "center",
+                        width: 50
+                    }
+                ]
+            });
+            debugger;
 
-        $("#jsGrid").jsGrid("loadData");
+            $("#jsGrid").jsGrid("loadData");
         }
 
 
@@ -100,19 +114,30 @@
 
         var deleteSelectedItems = function () {
             debugger;
-                if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
-                    return;
+            if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
+                return;
             Prodotti.DeleteItems(selectedItems);
             debugger;
 
-                LoadGrid2(Prodotti.ListaProdotti);
-                selectedItems = [];
+            LoadGrid2(Prodotti.ListaProdotti);
+            selectedItems = [];
 
         };
+        var editSelectedItem = function() {
+            debugger;
+            if (!selectedItems.length)
+                return;
+           
+            event.preventDefault();
+            debugger;
+            $('#dialog').dialog('open');
 
+
+        }
 
         function getData() {
             Prodotti.GetProdottoByDTOSearch(document.getElementById("txtPartialDescription").value);
+
 
         }
 
@@ -121,7 +146,9 @@
 
 <h2>Elenco Prodotti</h2>
 <b></b>
-
+<div id="dialog">
+    <iframe id="myIframe" src=""></iframe>
+</div>
 <div style="height: 90%; width: 100%; border-style: solid;border-color:red">
     <div id="jsGrid" style=" height: 100%; width: 100%; border-style: solid;border-color:yellow">
 
@@ -129,6 +156,8 @@
 
     </div>
 </div>
+
+
 
 @section SideBar
 {

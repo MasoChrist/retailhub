@@ -7,7 +7,8 @@ using DataAccess;
 using DataObjects;
 
 using RetailHubWeb.Controllers;
-using TestAngular.Models;
+using RetailHubWeb.Models;
+
 
 
 namespace TestAngular.Controllers

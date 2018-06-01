@@ -1,39 +1,51 @@
-﻿@model DataObjects.DTOProdotto
+﻿@using System.Drawing
+@model DataObjects.DTOProdotto
 
-@using (Html.BeginForm())
-{
+
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>DTOProdotto</h4>
+        <h4>@if(Model == null)
+            {<text>Nuovo Prodotto</text>}
+        else
+        
+            {<text>Modifica Prodotto</text>}
+            
+        </h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
+       
         <div class="form-group">
-            @Html.LabelFor(model => model.Descrizione, htmlAttributes: new { @class = "control-label col-md-2" })
+          <br>Descrizione<br/>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Descrizione, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Descrizione, new { id ="Descrzione"} )
                 @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DescrizioneBreve, htmlAttributes: new { @class = "control-label col-md-2" })
+            <br>Descrizione Breve<br />
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DescrizioneBreve, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.DescrizioneBreve , new {id ="DescrizioneBreve"}) 
                 @Html.ValidationMessageFor(model => model.DescrizioneBreve, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <button onclick="Undo()">Annulla</button>
+                <button onclick="Save()">Salva</button>
+
             </div>
         </div>
+
     </div>
-}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<script>
+
+
+
+</script>

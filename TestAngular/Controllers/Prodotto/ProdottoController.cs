@@ -7,7 +7,8 @@ using System.Web.Mvc;
 using Authentication;
 using DataAccess;
 using DataObjects;
-using TestAngular.Models;
+
+using RetailHubWeb.Models;
 
 namespace TestAngular.Controllers
 {

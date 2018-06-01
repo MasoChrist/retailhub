@@ -1,11 +1,11 @@
-﻿@model DataObjects.DTOAuthentication
+﻿@model RetailHubWeb.Models.DTOLoginView
 <div>
-    @if ( Model!=null && !string.IsNullOrEmpty(Model.Token))
+    @if ( Model!=null && Model.User!=null)
     {
         <text>
 
             "Utente loggato:"
-            @Model.UserName
+            @Model.User.UserName
             <br />
             <input type="button" value="LogOut" onclick="LogOut()" />
             <br>
@@ -22,6 +22,12 @@
             <br />
             <input type="button" value="Login" onclick="Login()" />
         </text>
+
+    }
+    @if (Model.Response != null && Model.Response.Error != null)
+    {
+
+        @Model.Response.Error.Error
 
     }
 </div>

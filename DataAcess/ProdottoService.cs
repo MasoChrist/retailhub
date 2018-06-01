@@ -99,6 +99,16 @@ namespace DataAccess
         {
             using (var ctx = new SqlServerEntities())
             {
+                if (!ctx.tabProdotti.Any())
+                {
+                    var tab = new tabProdotti();
+                    tab.ID = new Guid();
+                    tab.Descrizione = "Generico";
+                    tab.DescrizioneBreve = "Generico";
+                    ctx.Entry(tab).State = EntityState.Added;
+                    ctx.SaveChanges();
+
+                }
                 return ctx.tabProdotti.Where(expression).ToList().Select(mapTable).ToList();
             }
         }

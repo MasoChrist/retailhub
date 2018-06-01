@@ -8,6 +8,7 @@ using Authentication;
 using DataAccess;
 using DataObjects;
 using MAuthentication;
+using RetailHubWeb.Models;
 
 
 namespace TestAngular.Controllers
@@ -26,7 +27,7 @@ namespace TestAngular.Controllers
             var service = new AuthenticationService();
             var dto = service.ValidateToken(token);
 
-            return View(dto);
+            return View(new DTOLoginView(dto));
         }
 
     }

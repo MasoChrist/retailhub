@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using DataObjects;
-using RetailHubWeb.Models;
 
-namespace TestAngular.Models
+
+namespace RetailHubWeb.Models
 {
 
 
