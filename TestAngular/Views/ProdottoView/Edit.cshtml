@@ -29,23 +29,13 @@
                 @Html.ValidationMessageFor(model => model.DescrizioneBreve, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button onclick="Undo()">Annulla</button>
-                <button onclick="Save()">Salva</button>
-
-            </div>
-        </div>
-
+        <button onclick="Save()">Salva</button>
     </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 <script>
-
+    
 
 
 </script>

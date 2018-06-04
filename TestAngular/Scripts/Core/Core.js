@@ -1,7 +1,6 @@
 ﻿function getToken() {
     return getCookie('Token');
 }
-
 getCookie  = function(name)
 {
     debugger;

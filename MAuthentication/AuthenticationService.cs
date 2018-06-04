@@ -305,7 +305,8 @@ namespace MAuthentication
                     {
                         Error = new DTOAuthenticationResponseError
                         {
-                            Error = string.Format("Riprova in {0} secondi", (Options.MilisecondsThresold.OptionValue - span.Milliseconds / 1000.0)),
+                            Error =
+                                $"Riprova in {(Options.MilisecondsThresold.OptionValue - span.Milliseconds / 1000.0)} secondi",
                             ErrorCode = eAuthenticationResponseErrorCode.ThrottleRequest
                         }
                     };

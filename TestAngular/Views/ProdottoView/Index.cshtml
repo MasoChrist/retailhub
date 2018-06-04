@@ -12,8 +12,8 @@
 @section Scripts
 {
     <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
-    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid.min.css" />
-    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid.min.css"/>
+    <link type="text/css" rel="stylesheet" href="../../Scripts/jsGrid/jsgrid-theme.min.css"/>
 
     <script type="text/javascript" src="../../Scripts/jsGrid/jsgrid.min.js"></script>
 
@@ -21,36 +21,43 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("#dialog").dialog({
+        $(document).ready(function() {
+            $("#editElement").dialog({
                 autoOpen: false,
                 modal: true,
+                width: 800,
                 height: 600,
-                open: function (ev, ui) {
+                open: function(ev, ui) {
                     debugger;
-                    $('#myIframe').attr('src', '../Edit/' + selectedItems[0]);
+                    $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+
+                    $('#myIframe').attr('src', $(this).data('source'));
+                },
+                buttons: {
+                    'Chiudi': function() { $(this).dialog("close"); }
+
                 }
+
             });
-           
-      
+
+
         });
+
         function LoadGrid2(newdata) {
             debugger;
             Prodotti.ListaProdotti = newdata;
             //Setta la proprietà JsGrid con l'oggettone
             $("#jsGrid").jsGrid({
-
                 height: "98%",
                 width: "95%",
                 sorting: true,
                 autoload: false,
                 paging: false,
                 pageLoading: false,
-                filter:true,
-                controller:Prodotti
-                ,
+                filter: true,
+                controller: Prodotti,
 
-                rowClick: function (args) {
+                rowClick: function(args) {
                     // save selected item
                     selectedItem = args.item;
 
@@ -65,27 +72,28 @@
 
                 
                     @{
-                    foreach (var t in vis)
-                    {
-                        if (t.Visible)
+                        foreach (var t in vis)
                         {
-                            <text>
-                                { name: "@t.Name", type: "text", width: 150 },
-                            </text>
+                            if (t.Visible)
+                            {
+                                <text>
+                                    { name: "@t.Name", type: "text", width: 150 },
+                                </text>
+                            }
                         }
                     }
-                }
                     {
-                        headerTemplate: function () {
+                        headerTemplate: function() {
                             return "Selezione";
 
                         },
-                        itemTemplate: function (_, item) {
+                        itemTemplate: function(_, item) {
                             return $("<input>").attr("type", "checkbox")
                                 .prop("checked", $.inArray(item, selectedItems) > -1)
-                                .on("change", function () {
-                                    $(this).is(":checked") ? selectItem(item) : unselectItem(item);
-                                });
+                                .on("change",
+                                    function() {
+                                        $(this).is(":checked") ? selectItem(item) : unselectItem(item);
+                                    });
                         },
                         align: "center",
                         width: 50
@@ -98,21 +106,21 @@
         }
 
 
-    
         var selectedItems = [];
 
-        var selectItem = function (item) {
+        var selectItem = function(item) {
             selectedItems.push(item);
         };
 
 
-        var unselectItem = function (item) {
-            selectedItems = $.grep(selectedItems, function (i) {
-                return i !== item;
-            });
+        var unselectItem = function(item) {
+            selectedItems = $.grep(selectedItems,
+                function(i) {
+                    return i !== item;
+                });
         };
 
-        var deleteSelectedItems = function () {
+        var deleteSelectedItems = function() {
             debugger;
             if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
                 return;
@@ -127,14 +135,16 @@
             debugger;
             if (!selectedItems.length)
                 return;
-           
+            $('#editElement').data('source', './Edit/' + selectedItems[0]['identifier']);
             event.preventDefault();
-            debugger;
-            $('#dialog').dialog('open');
-
+            $('#editElement').dialog('open');
 
         }
-
+        var addNewItem = function() {
+            $('#editElement').data('source', './Edit');
+            event.preventDefault();
+            $('#editElement').dialog('open');
+        }
         function getData() {
             Prodotti.GetProdottoByDTOSearch(document.getElementById("txtPartialDescription").value);
 
@@ -146,11 +156,12 @@
 
 <h2>Elenco Prodotti</h2>
 <b></b>
-<div id="dialog">
-    <iframe id="myIframe" src=""></iframe>
-</div>
-<div style="height: 90%; width: 100%; border-style: solid;border-color:red">
-    <div id="jsGrid" style=" height: 100%; width: 100%; border-style: solid;border-color:yellow">
+
+<div style="height: 90%; width: 100%; border-style: solid; border-color: red">
+    <div id="editElement">
+        <iframe id="myIframe" src="" style="height: 100%;width:100%"></iframe>
+    </div>
+    <div id="jsGrid" style="height: 100%; width: 100%; border-style: solid; border-color: yellow">
 
 
 

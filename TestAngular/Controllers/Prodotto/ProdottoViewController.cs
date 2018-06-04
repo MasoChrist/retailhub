@@ -28,6 +28,7 @@ namespace TestAngular.Controllers
         [HttpGet]
         public ActionResult Edit(Guid? idProdotto )
         {
+            if (idProdotto == null) return PartialView(null);
          //   return PartialView(null);
             return PartialView(Service.GetByID(new GuidKey{ID = idProdotto??Guid.Empty}));
         }
