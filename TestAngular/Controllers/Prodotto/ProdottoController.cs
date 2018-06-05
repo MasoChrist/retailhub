@@ -17,7 +17,7 @@ namespace TestAngular.Controllers
     {
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/GetProdottoByDTOSearch")]
-       
+        [ApiAuthorize]
         public IHttpActionResult GetByDtoSerarch(DTOProdottoSearch search)
         {
             return Ok(Service.GetBySearcher(search).Select(DTOListaProdotti.Map));
@@ -28,6 +28,13 @@ namespace TestAngular.Controllers
         public IHttpActionResult DeleteProdotto(GuidKey key)
         {
             return Ok(Service.Delete(key, _options.PostazioneCorrente.OptionValue));
+        }
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/UpdateOrInsertProdotto")]
+        [ApiAuthorize]
+        public IHttpActionResult UpdateOrInsert(DTOProdotto prodotto)
+        {
+            return Ok(Service.UpdateOrInsert(prodotto, _options.PostazioneCorrente.OptionValue));
         }
     }
 }

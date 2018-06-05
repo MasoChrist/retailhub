@@ -49,14 +49,15 @@ namespace DataAccess
                 else
                 {
                     ctx.Entry(tab).State = EntityState.Modified;
-                    tab.Descrizione = Dato.Descrizione;
-                    tab.DescrizioneBreve = Dato.DescrizioneBreve;
-                    tab.isDeleted = false;
-                    tab.ID = Dato.ID;
-
+                   
 
                 }
-                if(Dato.ProdottiDiListino!=null)
+                tab.Descrizione = Dato.Descrizione;
+                tab.DescrizioneBreve = Dato.DescrizioneBreve;
+                tab.isDeleted = false;
+                tab.ID = Dato.ID;
+
+                if (Dato.ProdottiDiListino!=null)
                 {
 
                 }

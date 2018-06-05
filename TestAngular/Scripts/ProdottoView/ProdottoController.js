@@ -35,7 +35,11 @@
                 debugger;
                 LoadGrid2(newData);
             });
-}
+      },
+            UpdateOrInsert: function(prodotto) {
+                debugger;
+                webApiCall("POST", "UpdateOrInsertProdotto", prodotto);
+            }
        
     };
     window.Prodotti = prodotti;

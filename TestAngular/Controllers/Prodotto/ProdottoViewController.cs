@@ -16,21 +16,20 @@ namespace TestAngular.Controllers
  
     public class ProdottoViewController :BaseController<ProdottoService,DTOProdotto,GuidKey>
     {
-
-        // GET: ProdottoView
+    
         public ActionResult Index()
         {
            
-         //   var data = new ProdottoService();
+         
             return View(new DTOListaProdottiModel( string.Empty));
         }
 
         [HttpGet]
         public ActionResult Edit(Guid? idProdotto )
         {
-            if (idProdotto == null) return PartialView(null);
-         //   return PartialView(null);
-            return PartialView(Service.GetByID(new GuidKey{ID = idProdotto??Guid.Empty}));
+
+            if (idProdotto == null) return View("Edit", "_PopupLayout",(DTOProdotto)null);
+            return View("Edit", "_PopupLayout",Service.GetByID(new GuidKey{ID = idProdotto??Guid.Empty}));
         }
 
         

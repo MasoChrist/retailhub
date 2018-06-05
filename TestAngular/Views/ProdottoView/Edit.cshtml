@@ -1,6 +1,9 @@
 ﻿@using System.Drawing
 @model DataObjects.DTOProdotto
+@using System.ComponentModel
+@using DataObjects
 
+@using GridMvc.Html
 
     @Html.AntiForgeryToken()
     
@@ -17,7 +20,7 @@
         <div class="form-group">
           <br>Descrizione<br/>
             <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Descrizione, new { id ="Descrzione"} )
+                @Html.TextBoxFor(model => model.Descrizione, new { id ="Descrizione"} )
                 @Html.ValidationMessageFor(model => model.Descrizione, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -34,8 +37,32 @@
 
 
 
-<script>
-    
+
+<script type="text/javascript" src="../../Scripts/ProdottoView/ProdottoController.js"></script>
+<script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
+
+<script type ="text/javascript">
+    Save = function () {
+        @{
+            var id = new Guid();
+            if (Model != null)
+            {
+                id = Model.ID;
+            }
+          
+        }
+        var id = @id;
+        var dto = {
+            ID: id,
+            Descrizione : document.getElementById("Descrizione").value,
+            DescrizioneBreve: document.getElementById("DescrizioneBreve").value
+        };
+        prodotti.UpdateOrInsert(
+            dto
+
+        );
+
+    }
 
 
 </script>

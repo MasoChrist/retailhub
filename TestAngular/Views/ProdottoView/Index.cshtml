@@ -34,7 +34,9 @@
                     $('#myIframe').attr('src', $(this).data('source'));
                 },
                 buttons: {
-                    'Chiudi': function() { $(this).dialog("close"); }
+                    'Chiudi': function () { $(this).dialog("close");
+                        getData();
+                    }
 
                 }
 
@@ -135,7 +137,7 @@
             debugger;
             if (!selectedItems.length)
                 return;
-            $('#editElement').data('source', './Edit/' + selectedItems[0]['identifier']);
+            $('#editElement').data('source', './Edit/' + selectedItems[0]["ID"]);
             event.preventDefault();
             $('#editElement').dialog('open');
 
