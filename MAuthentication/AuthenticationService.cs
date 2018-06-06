@@ -276,14 +276,7 @@ namespace MAuthentication
                 };
 
             }
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
-            {
-                var tabuser = context.Users.FirstOrDefault(x => x.Token == token);
-                tabuser.LastRequestDate = DateTime.UtcNow;
-                context.Entry(tabuser).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-             
-            }
+            
             if( (user.LastRequestTime.HasValue && (DateTime.UtcNow - user.LastRequestTime.Value).Days > Options.TokenValidityDate.OptionValue) &&
                 (user.CreationDateTime.HasValue && (DateTime.UtcNow - user.CreationDateTime.Value).Days > Options.TokenValidityDate.OptionValue))
                 return new DTOAuthenticationResponse
@@ -316,6 +309,20 @@ namespace MAuthentication
             return new DTOAuthenticationResponse { Token = token };
 
 
+        }
+
+        //TODO: deve essere parte della chiamata a webapi (provare con  Application_AuthorizeRequest o simili)
+        public void SetLastCallDateTime(string token)
+        {
+            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            {
+                var tabuser = context.Users.FirstOrDefault(x => x.Token == token);
+                if(tabuser == null) return;
+                tabuser.LastRequestDate = DateTime.UtcNow;
+                context.Entry(tabuser).State = System.Data.Entity.EntityState.Modified;
+                context.SaveChanges();
+
+            }
         }
     }
 }

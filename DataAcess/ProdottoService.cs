@@ -110,7 +110,8 @@ namespace DataAccess
                     ctx.SaveChanges();
 
                 }
-                return ctx.tabProdotti.Where(expression).ToList().Select(mapTable).ToList();
+               ///TODO: linq Kit è più efficente
+                return ctx.tabProdotti.Where(x => !x.isDeleted).Where(expression).ToList().Select(mapTable).ToList();
             }
         }
 

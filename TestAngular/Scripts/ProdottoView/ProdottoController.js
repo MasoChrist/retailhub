@@ -14,15 +14,17 @@
            
         },
         DeleteItems: function(prodottiToDelete) {
-            for (i = 0; i < prodottiToDelete.length; i++) {
-                debugger;
-                webApiCall("POST", "DeleteProdottoByID", prodottiToDelete[i]["Identifier"]).then(
-                    function () {
+            webApiCall("POST", "DeleteProdottoByIDCollection", prodottiToDelete).then(
+                function() {
+                    for (i = 0; i < prodottiToDelete.length; i++) {
+                        debugger;
+
                         var clientIndex = $.inArray(prodottiToDelete[i], this.ListaProdotti);
                         this.ListaProdotti.splice(clientIndex, 1);
-                    });
-                
-            }
+
+
+                    }
+                });
         },
         GetProdottoByDTOSearch:function(description) {
            

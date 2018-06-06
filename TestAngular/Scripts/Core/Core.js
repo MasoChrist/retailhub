@@ -33,25 +33,69 @@ showErrorWindow = function (xhr, error, _type, endPoint, data) {
 
 webApiCall = function (_type, endPoint, data) {
     return new Promise(
-        (resolve, reject)=>
-        {
+        (resolve, reject) => {
             $.ajax({
                 headers: { 'Token': getToken() },
                 type: _type,
                 data: JSON.stringify(data),
                 url: getApiEntryPoint() + endPoint,
                 contentType: "application/json",
-                error: function (xhr, error) {
+                error: function(xhr, error) {
                     debugger;
-                    showErrorWindow(xhr, error, _type, endPoint, data)
+                    showErrorWindow(xhr, error, _type, endPoint, data);
 
-                }, success: function (newData) {
+                },
+                success: function(newData) {
                     debugger;
-                    resolve(newData)
+                    resolve(newData);
                 }
-                
+
             });
 
         }
-    )
+    );
 }
+$(document).ready(function() {
+    $("#editElement").append('<iframe id = "myIframe" src = "" style = "height: 100%; width: 100%" ></iframe >');
+    $('#myIframe').attr('src', $("#editElement").data('source'));
+    $("#editElement").dialog({
+        autoOpen: false,
+        modal: true,
+        width: 800,
+        height: 600,
+        open: function(ev, ui) {
+            debugger;
+            $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+        }
+    });
+});
+
+ShowPopup = function (source,funChiudi) {
+    debugger;
+    $("#editElement").dialog(
+        {
+
+            autoOpen: false,
+            modal: true,
+            width: 800,
+            height: 600,
+            open: function (ev, ui) {
+                debugger;
+                $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+            },
+        buttons: {
+            'Chiudi': function () {
+                debugger;
+                $("#editElement").dialog("close");
+                funChiudi();
+            }
+
+        }
+        });
+    debugger;
+    $('#myIframe').attr('src', source);
+    event.preventDefault();
+    $('#editElement').dialog('open');
+
+}
+    

@@ -21,32 +21,10 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function() {
-            $("#editElement").dialog({
-                autoOpen: false,
-                modal: true,
-                width: 800,
-                height: 600,
-                open: function(ev, ui) {
-                    debugger;
-                    $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
-
-                    $('#myIframe').attr('src', $(this).data('source'));
-                },
-                buttons: {
-                    'Chiudi': function () { $(this).dialog("close");
-                        getData();
-                    }
-
-                }
-
-            });
-
-
-        });
 
         function LoadGrid2(newdata) {
             debugger;
+            selectedItems = [];
             Prodotti.ListaProdotti = newdata;
             //Setta la proprietà JsGrid con l'oggettone
             $("#jsGrid").jsGrid({
@@ -127,8 +105,7 @@
             if (!selectedItems.length || !confirm("Eliminare gli elementi selezionati?"))
                 return;
             Prodotti.DeleteItems(selectedItems);
-            debugger;
-
+            getData();
             LoadGrid2(Prodotti.ListaProdotti);
             selectedItems = [];
 
@@ -137,15 +114,13 @@
             debugger;
             if (!selectedItems.length)
                 return;
-            $('#editElement').data('source', './Edit/' + selectedItems[0]["ID"]);
-            event.preventDefault();
-            $('#editElement').dialog('open');
+            ShowPopup('./Edit/' + selectedItems[0]["ID"], getData);
+
 
         }
-        var addNewItem = function() {
-            $('#editElement').data('source', './Edit');
-            event.preventDefault();
-            $('#editElement').dialog('open');
+        var addNewItem = function () {
+            debugger;
+            ShowPopup('./Edit', getData);
         }
         function getData() {
             Prodotti.GetProdottoByDTOSearch(document.getElementById("txtPartialDescription").value);
@@ -161,7 +136,7 @@
 
 <div style="height: 90%; width: 100%; border-style: solid; border-color: red">
     <div id="editElement">
-        <iframe id="myIframe" src="" style="height: 100%;width:100%"></iframe>
+        
     </div>
     <div id="jsGrid" style="height: 100%; width: 100%; border-style: solid; border-color: yellow">
 

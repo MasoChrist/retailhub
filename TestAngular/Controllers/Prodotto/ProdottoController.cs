@@ -30,11 +30,28 @@ namespace TestAngular.Controllers
             return Ok(Service.Delete(key, _options.PostazioneCorrente.OptionValue));
         }
         [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/DeleteProdottoByIDCollection")]
+        [ApiAuthorize]
+        public IHttpActionResult DeleteProdotti(GuidKey[] keys)
+        {
+
+            return Ok(keys.Select(key =>
+                new
+                {
+                    ID = key,
+                    Success = Service.Delete(key, _options.PostazioneCorrente.OptionValue)
+                }));
+        
+        }
+
+        [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/UpdateOrInsertProdotto")]
         [ApiAuthorize]
         public IHttpActionResult UpdateOrInsert(DTOProdotto prodotto)
         {
             return Ok(Service.UpdateOrInsert(prodotto, _options.PostazioneCorrente.OptionValue));
         }
+
+        //DeleteProdottoByIDCollection
     }
 }
