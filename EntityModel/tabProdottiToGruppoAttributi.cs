@@ -9,7 +9,7 @@ namespace EntityModel
     [Table("tabProdottiToGruppoAttributi")]
     public partial class tabProdottiToGruppoAttributi: baseEntityTable
     {
-        public Guid ID { get; set; }
+       
 
        
 

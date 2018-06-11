@@ -16,7 +16,7 @@ namespace EntityModel
             tabSetAttributiProdottoListino = new HashSet<tabSetAttributiProdottoListino>();
         }
 
-        public Guid Id { get; set; }
+       
 
         [Required]
         public string Descrizione { get; set; }

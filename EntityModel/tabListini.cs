@@ -15,7 +15,7 @@ namespace EntityModel
             tabPrezzoProdottoDiListino = new HashSet<tabPrezzoProdottoDiListino>();
         }
 
-        public Guid ID { get; set; }
+       
 
         [Required]
         [StringLength(50)]

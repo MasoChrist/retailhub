@@ -14,12 +14,30 @@ namespace DataObjects
         public string DescrizioneBreve { get; set; }
         public  List<DTOGruppoAttributi> AttributiDisponibili { get; set; }
         public  List<DTOProdottoDiListino> ProdottiDiListino { get; set; }
+        /// <summary>
+        /// 1 prodotto = 1 Categoria. 1 Categoria = N prodotti
+        /// </summary>
+        public  DTOCategoria Categoria { get; set; }
+
        
     }
 
 
-    public class DTOProdottoSearch
+    public class DTOProdottoSearch:DTOSearchByAttribute
     {
         public  string PartialDescription { get; set; }
+        /// <summary>
+        /// Cerca tutti i prodotti che hanno tra le categorie padre il nome
+        /// </summary>
+        public  string PartialCategoria { get; set; }
+       /// <summary>
+       /// cerca il prodotto associato al prodotto di listino con SKU
+       /// </summary>
+        public  string PartialSKU { get; set; }
+
+        /// <summary>
+        /// Cerca il prodotto in base agli attributi ( definizione e/o valore) del prodotto
+        /// </summary>
+    
     }
 }

@@ -46,10 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DTOAttributeSearch.cs" />
     <Compile Include="Core\DTOAuthentication.cs" />
     <Compile Include="Core\GridMapping.cs" />
     <Compile Include="Core\IDTO.cs" />
     <Compile Include="Core\NavBarItem.cs" />
+    <Compile Include="DTOCategoria.cs" />
     <Compile Include="DTOFunction.cs" />
     <Compile Include="DTOGruppoAttributi.cs" />
     <Compile Include="DTOListinoVendita.cs" />

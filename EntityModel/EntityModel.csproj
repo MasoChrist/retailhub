@@ -61,15 +61,21 @@
     <Compile Include="Migrations\201805311138163_Inheritance1.Designer.cs">
       <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806111534459_Inheritance2.cs" />
+    <Compile Include="Migrations\201806111534459_Inheritance2.Designer.cs">
+      <DependentUpon>201806111534459_Inheritance2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerEntities.cs" />
+    <Compile Include="tabCategorie.cs" />
     <Compile Include="tabGruppoAttributi.cs" />
     <Compile Include="tabListini.cs" />
     <Compile Include="tabPrezzoProdottoDiListino.cs" />
     <Compile Include="tabProdotti.cs" />
     <Compile Include="tabProdottiDiListino.cs" />
     <Compile Include="tabProdottiToGruppoAttributi.cs" />
+    <Compile Include="tabProperties.cs" />
     <Compile Include="tabSetAttributiProdottoListino.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +93,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805311138163_Inheritance1.resx">
       <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806111534459_Inheritance2.resx">
+      <DependentUpon>201806111534459_Inheritance2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

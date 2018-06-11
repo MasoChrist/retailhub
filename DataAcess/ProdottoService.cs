@@ -93,6 +93,9 @@ namespace DataAccess
                 Descrizione = product.Descrizione,
                 
                 DescrizioneBreve = product.DescrizioneBreve
+                //todo: ,Categoria = product.Categoria
+               ,AttributiDisponibili = product.tabProdottiToGruppoAttributi
+               
             };
         }
 
@@ -110,7 +113,8 @@ namespace DataAccess
                     ctx.SaveChanges();
 
                 }
-               ///TODO: linq Kit è più efficente
+               
+               //TODO: linq Kit è più efficente
                 return ctx.tabProdotti.Where(x => !x.isDeleted).Where(expression).ToList().Select(mapTable).ToList();
             }
         }

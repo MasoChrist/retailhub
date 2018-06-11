@@ -16,19 +16,24 @@ namespace EntityModel
             tabProdottiToGruppoAttributi = new HashSet<tabProdottiToGruppoAttributi>();
         }
 
-        public Guid ID { get; set; }
+        
 
         [Required]
         public string Descrizione { get; set; }
 
         [Required]
         public string DescrizioneBreve { get; set; }
-
+        [Required]
+        public  string CodiceArticolo { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabProdottiDiListino> tabProdottiDiListino { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabProdottiToGruppoAttributi> tabProdottiToGruppoAttributi { get; set; }
+
+        [ForeignKey("Categoria")]
+        public  Guid? IdCategoria { get; set; }
+        public  tabCategorie Categoria { get; set; }
     }
 }

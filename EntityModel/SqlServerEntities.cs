@@ -20,7 +20,9 @@ namespace EntityModel
         public virtual DbSet<tabProdottiDiListino> tabProdottiDiListino { get; set; }
         public virtual DbSet<tabProdottiToGruppoAttributi> tabProdottiToGruppoAttributi { get; set; }
         public virtual DbSet<tabSetAttributiProdottoListino> tabSetAttributiProdottoListino { get; set; }
+        public virtual  DbSet<tabProperties> tabProperties { get; set; }
 
+        public  virtual  DbSet<tabCategorie> tabCategorie { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<tabGruppoAttributi>()
