@@ -23,7 +23,7 @@ namespace DataObjects
     }
 
 
-    public class DTOProdottoSearch:DTOSearchByAttribute
+    public class DTOProdottoSearch: DTOSearchByProprieta
     {
         public  string PartialDescription { get; set; }
         /// <summary>
@@ -35,9 +35,9 @@ namespace DataObjects
        /// </summary>
         public  string PartialSKU { get; set; }
 
-        /// <summary>
-        /// Cerca il prodotto in base agli attributi ( definizione e/o valore) del prodotto
-        /// </summary>
+     
     
     }
+
+
 }

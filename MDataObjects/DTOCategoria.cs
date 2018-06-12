@@ -18,13 +18,16 @@ namespace DataObjects
     }
 
 
-    public class DTOCategoriaSearcher:DTOSearchByAttribute
+    public class DTOCategoriaSearcher:DTOSearchByProprieta
     {
         public  string PartialNomeCategoria { get; set; }
 
-        /// <summary>
-        /// tutte le categorie che hanno tra i padri il nome categoria
-        /// </summary>
-        public  string PartialNomeCategoriaPadre { get; set; }
+       
+    }
+
+    public class DTOCategoriaSearcherByParent
+    {
+        public  Guid IDCategoriaPadre { get; set; }
+        public  bool AllRoots { get; set; }
     }
 }

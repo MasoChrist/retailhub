@@ -13,7 +13,7 @@ namespace EntityModel
         public tabProdotti()
         {
             tabProdottiDiListino = new HashSet<tabProdottiDiListino>();
-            tabProdottiToGruppoAttributi = new HashSet<tabProdottiToGruppoAttributi>();
+            tabGruppoAttributi = new HashSet<tabGruppoAttributi>();
         }
 
         
@@ -30,7 +30,7 @@ namespace EntityModel
         public virtual ICollection<tabProdottiDiListino> tabProdottiDiListino { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tabProdottiToGruppoAttributi> tabProdottiToGruppoAttributi { get; set; }
+        public virtual ICollection<tabGruppoAttributi> tabGruppoAttributi { get; set; }
 
         [ForeignKey("Categoria")]
         public  Guid? IdCategoria { get; set; }

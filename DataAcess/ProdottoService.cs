@@ -80,7 +80,19 @@ namespace DataAccess
 
         public List<DTOProdotto> GetBySearcher(DTOProdottoSearch searcher)
         {
-            return GetByContition(x => x.DescrizioneBreve.Contains(searcher.PartialDescription));
+            var predicate = BaseEntityPredicateBuilder.GetBasicPredicate<tabProdotti>(searcher);
+            if (!string.IsNullOrEmpty(searcher.PartialDescription))
+                predicate =
+                    predicate.And(
+                        x =>
+                            x.Descrizione.Contains(searcher.PartialDescription) ||
+                            x.DescrizioneBreve.Contains(searcher.PartialDescription));
+            if (!string.IsNullOrEmpty(searcher.PartialCategoria))
+                predicate = predicate.And(x => x.Categoria.Nome.Contains(searcher.PartialCategoria));
+            if (!string.IsNullOrEmpty(searcher.PartialSKU)) ;
+                //todo: SKU è associato ai prodotti di listino
+                
+            return GetByContition(predicate);
         }
 
 
@@ -94,7 +106,8 @@ namespace DataAccess
                 
                 DescrizioneBreve = product.DescrizioneBreve
                 //todo: ,Categoria = product.Categoria
-               ,AttributiDisponibili = product.tabProdottiToGruppoAttributi
+               
+                //todo:,AttributiDisponibili = product.tabGruppoAttributi
                
             };
         }

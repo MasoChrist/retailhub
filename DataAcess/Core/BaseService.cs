@@ -7,7 +7,7 @@ using System.Text;
 using ClientNotification;
 
 using DataObjects;
-
+using EntityModel;
 using Newtonsoft.Json;
 
 namespace DataAccess
@@ -25,7 +25,7 @@ namespace DataAccess
         protected Guid _myIdentifier;
         protected EntityModel.SqlServerEntities _context;
 
-        public BaseService(Guid identifier, EntityModel.SqlServerEntities context)
+        protected BaseService(Guid identifier, EntityModel.SqlServerEntities context)
         {
             _myIdentifier = identifier;
             _context = context;

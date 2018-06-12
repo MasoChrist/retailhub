@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations.Model;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -169,11 +170,26 @@ namespace MAuthentication
                 if (user == null) return string.Empty;
                 if (string.IsNullOrEmpty(user.Token))
                     generateNewToken(user);
+                user.CreationDateTime = DateTime.UtcNow;
+                UpdateLoginDate(user);
                 utente.Token = user.Token;
                 return user.Token;
             }
         }
 
+        protected void UpdateLoginDate(DTOAuthentication user)
+        {
+            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            {
+                var tabuser = context.Users.FirstOrDefault(x=> x.Token.Equals(user.Token));
+                if (user == null)
+                return;
+                user.CreationDateTime = DateTime.UtcNow;
+                tabuser.LastRequestDate = DateTime.UtcNow;
+                context.Entry(tabuser).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
         private void generateNewToken(DTOAuthentication user)
         {
             using (var context = new RetailHubAuthenticationContext())

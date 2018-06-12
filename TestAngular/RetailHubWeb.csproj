@@ -56,6 +56,9 @@
     <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
     </Reference>
+    <Reference Include="LinqKit, Version=1.1.15.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.15\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -190,8 +193,11 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\BaseController\BaseApiController.cs" />
     <Compile Include="Controllers\BaseController\BaseController.cs" />
+    <Compile Include="Controllers\Categoria\CategoriaController.cs" />
+    <Compile Include="Controllers\Categoria\CategoriaViewController.cs" />
     <Compile Include="Controllers\FunctionBar\FunctionBarViewController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\jsTree3Controller.cs" />
     <Compile Include="Controllers\Login\LoginController.cs" />
     <Compile Include="Controllers\Login\LoginViewController.cs" />
     <Compile Include="Controllers\NavBarController.cs" />
@@ -205,6 +211,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Core\GridMappingAttribute.cs" />
     <Compile Include="Models\Error\DTOError.cs" />
+    <Compile Include="Models\jsTree3Node.cs" />
     <Compile Include="Models\Login\DTOLoginView.cs" />
     <Compile Include="Models\Prodotto\DTOListaProdotti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -214,6 +221,17 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\jsTree\docs.css" />
+    <Content Include="Content\jsTree\themes\default-dark\32px.png" />
+    <Content Include="Content\jsTree\themes\default-dark\40px.png" />
+    <Content Include="Content\jsTree\themes\default-dark\style.css" />
+    <Content Include="Content\jsTree\themes\default-dark\style.min.css" />
+    <Content Include="Content\jsTree\themes\default-dark\throbber.gif" />
+    <Content Include="Content\jsTree\themes\default\32px.png" />
+    <Content Include="Content\jsTree\themes\default\40px.png" />
+    <Content Include="Content\jsTree\themes\default\style.css" />
+    <Content Include="Content\jsTree\themes\default\style.min.css" />
+    <Content Include="Content\jsTree\themes\default\throbber.gif" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -299,6 +317,8 @@
     <Content Include="Scripts\jsGrid\jsgrid.js" />
     <Content Include="Scripts\jsGrid\jsgrid.min.css" />
     <Content Include="Scripts\jsGrid\jsgrid.min.js" />
+    <Content Include="Scripts\jsTree3\jstree.js" />
+    <Content Include="Scripts\jsTree3\jstree.min.js" />
     <Content Include="Scripts\Login\Login.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\ProdottoView\ProdottoController.js" />
@@ -328,6 +348,10 @@
     <Content Include="Scripts\jquery-1.12.4.min.map" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Views\Shared\_jsTreeDemo.cshtml" />
+    <Content Include="Views\jsTree3\Demo.cshtml" />
+    <Content Include="Views\jsTree3\AJAXDemo.cshtml" />
+    <Content Include="Views\CategoriaView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,7 @@ namespace EntityModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public tabGruppoAttributi()
         {
-            tabProdottiToGruppoAttributi = new HashSet<tabProdottiToGruppoAttributi>();
+            tabProdotti = new HashSet<tabProdotti>();
             tabSetAttributiProdottoListino = new HashSet<tabSetAttributiProdottoListino>();
         }
 
@@ -29,9 +29,9 @@ namespace EntityModel
     
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tabProdottiToGruppoAttributi> tabProdottiToGruppoAttributi { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tabSetAttributiProdottoListino> tabSetAttributiProdottoListino { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual  ICollection<tabProdotti> tabProdotti { get; set; }
+
     }
 }
