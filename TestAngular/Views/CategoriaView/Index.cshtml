@@ -5,28 +5,67 @@
 }
 
 <h2>Albero Categorie</h2>
-<div id="alberoCategorie"  data-key="@Model.Key"></div>
+<div id="alberoCategorie"></div>
 @section Scripts
 {
+    <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
+
+    <link rel="stylesheet" href="http://static.jstree.com/3.0.0-beta5/assets/bootstrap/css/bootstrap.css" />
+    <link href="~/Content/jsTree/docs.css" rel="stylesheet" />
+    <link href="~/Content/jsTree/themes/default/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/Scripts/jsTree3/jstree.js"></script>
     <script type="text/javascript">
         $('#alberoCategorie').jstree({
-            "plugins": ["search", "wholerow"],
-            'core': {
-                'data': {
-                    'url': function (node) {
-                        return node.id === '#' ? getApiEntryPoint() + "GetChildren" :getApiEntryPoint()  + "GetChildren/" + node.ID;
+            "core": { "html_titles": true, "load_open": true },
+            "plugins": ["themes", "json_data", "ui", "cookies", "crrm", "sort"],
+            'ajax': {
 
-                    },
-                    'data': function (node) {
-                        return { 'id': node.ID };
+                'url': function (node) {
+                    debugger;
+                    if (node.id === '#')
+                        return getApiEntryPoint() + 'GetChildren';
+                    else {
+                        return getApiEntryPoint() + 'GetChildren/' + node.id;
                     }
+
+                },
+                'type': 'GET',
+                'header': 'Token=' + getToken()
+                , "success": function (ops) {
+                    // this is called when the AJAX request is successful. "ops"
+                    // contains the returned data from the server, which in
+                    // my case is a json object containing an array of objects.
+                    data = [];
+                    // go through data and create an array of objects to be given
+                    // to jsTree just like when you're creating a static jsTree.
+                    for (opnum in ops) {
+                        var op = ops[opnum];
+                        node = {
+                            "data": op.info,
+                            "metadata": op,
+                            // THIS LINE BELOW IS THE MAGIC KEY!!! This will force
+                            //  jsTree to consider the node
+                            // openable and thus issue a new AJAX call hen the
+                            // user clicks on the little "+" symbol or
+                            // whatever opens nodes in your theme
+                            "state": "closed"
+                        };
+                        data.push(node);
+                    }
+                    return data; // this will return the formed array
+                    // "data" to jsTree which will turn
+                    // it into a list of nodes and
+                    // insert it into the tree.
                 }
             }
+
         });
 
-        $('#alberoCategorie').on('changed.jstree', function (e, data) {
-            console.log("=> selected node: " + data.node.id);
-        });
+        $('#alberoCategorie').on('changed.jstree',
+            function (e, data) {
+                console.log("=> selected node: " + data.node.id);
+            });
     </script>
 
 
