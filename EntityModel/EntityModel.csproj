@@ -56,17 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="baseEntityTable.cs" />
-    <Compile Include="Migrations\201805311132458_Inheritance.cs" />
-    <Compile Include="Migrations\201805311132458_Inheritance.Designer.cs">
-      <DependentUpon>201805311132458_Inheritance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805311138163_Inheritance1.cs" />
-    <Compile Include="Migrations\201805311138163_Inheritance1.Designer.cs">
-      <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806111534459_Inheritance2.cs" />
-    <Compile Include="Migrations\201806111534459_Inheritance2.Designer.cs">
-      <DependentUpon>201806111534459_Inheritance2.cs</DependentUpon>
+    <Compile Include="Migrations\201806191449234_Initial.cs" />
+    <Compile Include="Migrations\201806191449234_Initial.Designer.cs">
+      <DependentUpon>201806191449234_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -91,14 +83,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805311132458_Inheritance.resx">
-      <DependentUpon>201805311132458_Inheritance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805311138163_Inheritance1.resx">
-      <DependentUpon>201805311138163_Inheritance1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806111534459_Inheritance2.resx">
-      <DependentUpon>201806111534459_Inheritance2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806191449234_Initial.resx">
+      <DependentUpon>201806191449234_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

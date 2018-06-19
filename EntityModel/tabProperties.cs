@@ -9,10 +9,9 @@ using System.Data.Entity.Spatial;
 namespace EntityModel
 {
     [Table("tabProperties")]
-    public class tabProperties:baseEntityTable
+    public class tabProperties
     {
-       
-       
+        public  Guid ID { get; set; }
         public  string PropertyName { get; set; }
         public  string PropertyValue { get; set; }
         [ForeignKey("BaseEntity")]

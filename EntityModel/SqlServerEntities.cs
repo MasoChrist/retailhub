@@ -25,10 +25,19 @@ namespace EntityModel
         public  virtual  DbSet<tabCategorie> tabCategorie { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            
 
-            
 
+            modelBuilder.Entity<baseEntityTable>()
+                .Map<baseEntityTable>(m => m.Requires("Type").HasValue("baseEntityTable"))
+                .Map<tabCategorie>(m => m.Requires("Type").HasValue("tabCategorie"))
+                .Map<tabProdotti>(m => m.Requires("Type").HasValue("tabProdotti"))
+                .Map<tabGruppoAttributi>(m => m.Requires("Type").HasValue("tabGruppoAttributi"))
+                .Map<tabSetAttributiProdottoListino>(m => m.Requires("Type").HasValue("tabSetAttributiProdottoListino"))
+                .Map<tabProdottiDiListino>(m => m.Requires("Type").HasValue("tabProdottiDiListino"))
+                .Map<tabPrezzoProdottoDiListino>(m => m.Requires("Type").HasValue("tabPrezzoProdottoDiListino"))
+                .Map<tabListini>(m => m.Requires("Type").HasValue("tabListini"))
+                .Map<tabProdottiToGruppoAttributi>(m => m.Requires("Type").HasValue("tabProdottiToGruppoAttributi"));
+               
             modelBuilder.Entity<tabListini>()
                 .HasMany(e => e.tabPrezzoProdottoDiListino)
                 .WithRequired(e => e.tabListini)
@@ -61,6 +70,9 @@ namespace EntityModel
                 .WithRequired(e => e.tabProdottiDiListino)
                 .HasForeignKey(e => e.IDProdottoListino)
                 .WillCascadeOnDelete(false);
+
+
+
         }
     }
 }

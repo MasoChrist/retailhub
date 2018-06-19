@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Categorie\DTOAlberoCategorie.cs" />
     <Compile Include="Models\Core\GridMappingAttribute.cs" />
     <Compile Include="Models\Error\DTOError.cs" />
     <Compile Include="Models\jsTree3Node.cs" />
@@ -324,7 +325,9 @@
     <Content Include="Scripts\ProdottoView\ProdottoController.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

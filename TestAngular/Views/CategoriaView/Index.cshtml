@@ -8,13 +8,22 @@
 <div id="alberoCategorie"></div>
 @section Scripts
 {
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+
+
     <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
 
     <link rel="stylesheet" href="http://static.jstree.com/3.0.0-beta5/assets/bootstrap/css/bootstrap.css" />
     <link href="~/Content/jsTree/docs.css" rel="stylesheet" />
     <link href="~/Content/jsTree/themes/default/style.css" rel="stylesheet" />
+
     <script src="~/Scripts/jquery-1.12.4.js"></script>
     <script src="~/Scripts/jsTree3/jstree.js"></script>
+    <script type="text/javascript" src="../../Scripts/Core/Core.js"></script>
     <script type="text/javascript">
         $('#alberoCategorie').jstree({
             "core": { "html_titles": true, "load_open": true },
@@ -24,9 +33,9 @@
                 'url': function (node) {
                     debugger;
                     if (node.id === '#')
-                        return getApiEntryPoint() + 'GetChildren';
+                        return getApiEntryPoint() + 'GetCategoriaChild';
                     else {
-                        return getApiEntryPoint() + 'GetChildren/' + node.id;
+                        return getApiEntryPoint() + 'GetCategoriaChild/' + node.id;
                     }
 
                 },
