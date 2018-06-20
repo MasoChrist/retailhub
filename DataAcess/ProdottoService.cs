@@ -72,7 +72,7 @@ namespace DataAccess
         {
             using (var ctx = new EntityModel.SqlServerEntities())
             {
-                return mapTable(ctx.tabProdotti.FirstOrDefault(x => x.ID.Equals(chiave.ID)));
+                return MapTable(ctx.tabProdotti.FirstOrDefault(x => x.ID.Equals(chiave.ID)));
             }
         }
 
@@ -96,7 +96,7 @@ namespace DataAccess
         }
 
 
-        public DTOProdotto mapTable(tabProdotti product)
+        public DTOProdotto MapTable(tabProdotti product)
         {
             if (product == null) return null;
             return new DTOProdotto
@@ -119,7 +119,7 @@ namespace DataAccess
                 if (!ctx.tabProdotti.Any())
                 {
                     var tab = new tabProdotti();
-                    tab.ID = new Guid();
+                    tab.ID = Guid.NewGuid();
                     tab.Descrizione = "Generico";
                     tab.DescrizioneBreve = "Generico";
                     ctx.Entry(tab).State = EntityState.Added;
@@ -128,7 +128,7 @@ namespace DataAccess
                 }
                
                //TODO: linq Kit è più efficente
-                return ctx.tabProdotti.Where(x => !x.isDeleted).Where(expression).ToList().Select(mapTable).ToList();
+                return ctx.tabProdotti.Where(x => !x.isDeleted).Where(expression).Select(MapTable).ToList();
             }
         }
 

@@ -52,52 +52,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalOptions.cs">
-      <DependentUpon>OptionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OptionModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OptionModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OptionModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OptionModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="OptionModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>OptionModel.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="GlobalOptions.cs" />
+    <Compile Include="RetailHubOptions.cs" />
     <Compile Include="ServerConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerOptions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="OptionModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>OptionModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="OptionModel.edmx.diagram">
-      <DependentUpon>OptionModel.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="OptionModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>OptionModel.Context.cs</LastGenOutput>
-      <DependentUpon>OptionModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="OptionModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>OptionModel.edmx</DependentUpon>
-      <LastGenOutput>OptionModel.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

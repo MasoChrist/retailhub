@@ -116,7 +116,7 @@ namespace MAuthentication
       protected  Options.ServerOptions Options = new ServerOptions();
         protected string encrypt(string strToEncrypt)
         {
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            using (var context = new MAuthentication.AuthenticationModel())
             {
                 if (string.IsNullOrEmpty( Options.CryptEntropyValues.OptionValue))
                 {
@@ -143,16 +143,16 @@ namespace MAuthentication
 
         protected DTOAuthentication GetByCondition(Func<Users,bool> expression)
         {
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            using (var context = new MAuthentication.AuthenticationModel())
             {
                 var user = context.Users.FirstOrDefault(expression);
                 if (user == null) return null;
                 return new DTOAuthentication
                 {
                     CreationDateTime = user.ActivationDate,
-                    LastRequestTime = user.LastRequestDate,
+                    LastRequestTime = user.LastRequestDateTime,
                     Token = user.Token,
-                    UserName = user.userName,
+                    UserName = user.UserName,
                     EncryptedPassword =user.Password,IsActive = user.Active
                 };
             }
@@ -161,12 +161,12 @@ namespace MAuthentication
         private string getToken(DTOAuthentication utente)
         {
 
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            using (var context = new MAuthentication.AuthenticationModel())
             {
                 var password = utente.EncryptedPassword;
                 if (utente == null) return null;
 
-                var user = GetByCondition(x => string.Equals(x.userName, utente.UserName, StringComparison.InvariantCultureIgnoreCase) && x.Password.Equals(password) && x.Active);
+                var user = GetByCondition(x => string.Equals(x.UserName, utente.UserName, StringComparison.InvariantCultureIgnoreCase) && x.Password.Equals(password) && x.Active);
                 if (user == null) return string.Empty;
                 if (string.IsNullOrEmpty(user.Token))
                     generateNewToken(user);
@@ -179,27 +179,27 @@ namespace MAuthentication
 
         protected void UpdateLoginDate(DTOAuthentication user)
         {
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            using (var context = new MAuthentication.AuthenticationModel())
             {
                 var tabuser = context.Users.FirstOrDefault(x=> x.Token.Equals(user.Token));
                 if (user == null)
                 return;
                 user.CreationDateTime = DateTime.UtcNow;
-                tabuser.LastRequestDate = DateTime.UtcNow;
+                tabuser.LastRequestDateTime = DateTime.UtcNow;
                 context.Entry(tabuser).State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
         private void generateNewToken(DTOAuthentication user)
         {
-            using (var context = new RetailHubAuthenticationContext())
+            using (var context = new AuthenticationModel())
             {
                 user.Token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-                var tab = context.Users.FirstOrDefault(x => x.userName.Equals(user.UserName,StringComparison.InvariantCultureIgnoreCase) && x.Password==user.EncryptedPassword);
+                var tab = context.Users.FirstOrDefault(x => x.UserName.Equals(user.UserName,StringComparison.InvariantCultureIgnoreCase) && x.Password==user.EncryptedPassword);
                // if (tab == null) throw new Exception();//Todo
                 tab.Token = user.Token;
                 tab.ActivationDate = DateTime.UtcNow;
-                tab.LastRequestDate = DateTime.UtcNow;
+                tab.LastRequestDateTime = DateTime.UtcNow;
                 context.SaveChanges();
             }
         }
@@ -218,7 +218,7 @@ namespace MAuthentication
         {
             var pwd = encrypt(request.Password);
             //--REM
-            using (var context = new RetailHubAuthenticationContext())
+            using (var context = new AuthenticationModel())
             {
                 if (!context.Users.Any())
                 {
@@ -228,7 +228,7 @@ namespace MAuthentication
                     tab.ID = Guid.NewGuid();
                     tab.Mail = "mauro@mauro";
                     tab.Password = encrypt("mauro");
-                    tab.userName = "mauro";
+                    tab.UserName = "mauro";
                     context.Entry(tab).State = EntityState.Added;
                     context.SaveChanges();
                 }
@@ -238,7 +238,7 @@ namespace MAuthentication
                 var user =
                     GetByCondition(
                         x =>
-                            (x.userName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase) || x.Mail.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase)) &&
+                            (x.UserName.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase) || x.Mail.Equals(request.UserName, StringComparison.InvariantCultureIgnoreCase)) &&
                             x.Password.Equals(pwd));
             if (user == null) return new DTOAuthenticationResponse
             {
@@ -330,11 +330,11 @@ namespace MAuthentication
         //TODO: deve essere parte della chiamata a webapi (provare con  Application_AuthorizeRequest o simili)
         public void SetLastCallDateTime(string token)
         {
-            using (var context = new MAuthentication.RetailHubAuthenticationContext())
+            using (var context = new MAuthentication.AuthenticationModel())
             {
                 var tabuser = context.Users.FirstOrDefault(x => x.Token == token);
                 if(tabuser == null) return;
-                tabuser.LastRequestDate = DateTime.UtcNow;
+                tabuser.LastRequestDateTime = DateTime.UtcNow;
                 context.Entry(tabuser).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
